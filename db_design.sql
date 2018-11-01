@@ -28,24 +28,6 @@ permissions integer check(permissions in (0, 1)) not null,
 primary key (UGROUP_ID)
 );
 
---Task(TASK_ID, user_id, current_status, task_description, task_data, 
---     user_comment)
---    foreign key (user_id) references Account
-
-drop table Task cacade constraints;
-create table Task
-(TASK_ID char(8),
-user_id char(8),
-project_id char(8) not null,
-current_status varchar2(16) not null,
-task_description varchar2(280),
-task_date datetime,
-user_comment varchar2(140),
-primary key (task_id),
-foreign key (user_id) references Account,
-foreign key (project_id) references Project
-);
-
 --Project(PROJECT_ID, project_name, project_description, group_id)
 --    foreign key (group_id) references Group
 
@@ -55,7 +37,25 @@ create table Project
 project_description varchar2(280),
 ugroup_id char(8),
 primary key (project_id),
-foriegn key (ugroup_id) references Usergroup
+foreign key (ugroup_id) references Usergroup
+);
+
+--Task(TASK_ID, user_id, current_status, task_description, task_data, 
+--     user_comment)
+--    foreign key (user_id) references Account
+
+drop table Task cascade constraints;
+create table Task
+(TASK_ID char(8),
+user_id char(8),
+project_id char(8) not null,
+current_status varchar2(16) not null,
+task_description varchar2(280),
+task_date date,
+user_comment varchar2(140),
+primary key (task_id),
+foreign key (user_id) references Account,
+foreign key (project_id) references Project
 );
 
 --Users_in_group(USER_ID, GROUP_ID)
@@ -68,7 +68,7 @@ create table Users_in_group
 UGROUP_ID char(8),
 primary key (user_id, ugroup_id),
 foreign key (user_id) references Account,
-foreign key (ugroup_id) references Group
+foreign key (ugroup_id) references Usergroup
 );
 
 --Tasks_in_project(PROJECT_ID, TASK_ID)
