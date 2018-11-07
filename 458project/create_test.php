@@ -63,7 +63,7 @@ function create_test()
 	   $current_account_email = oci_result($test_query_stmt, "EMAIL_ADDR");
 	   ?>
 	   <option value="<?= $curr_account_id ?>">
-	         <?= $curr_account_id ?> : <?= $curr_account_email ?> </option>
+	         <?= $curr_account_id ?> : <?= $current_account_email ?> </option>
            <?php
       }
       ?>
