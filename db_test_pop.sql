@@ -1,5 +1,6 @@
 delete from Event_users;
 delete from Tasks_in_project;
+delete from Users_in_group;
 delete from Task;
 delete from Project;
 delete from Usergroup;
