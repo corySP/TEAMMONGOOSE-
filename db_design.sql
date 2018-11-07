@@ -7,6 +7,7 @@ create table Account
 (USER_ID char(8),
 email_addr varchar2(32) not null,
 password varchar2(64) not null, --Don't know what datatype; temporary
+user_name varchar2(32),
 primary key (user_id)
 );
 
@@ -16,6 +17,7 @@ drop table Event cascade constraints;
 create table Event
 (EVENT_ID char(8),
 event_datetime date not null,
+event_name varchar(32),
 primary key (event_id)
 );
 
@@ -25,6 +27,7 @@ drop table Usergroup cascade constraints;
 create table Usergroup
 (UGROUP_ID char(8),
 permissions integer check(permissions in (0, 1)) not null,
+ugroup_name varchar(16),
 primary key (UGROUP_ID)
 );
 
@@ -36,6 +39,7 @@ create table Project
 (PROJECT_ID char(8),
 project_description varchar2(280),
 ugroup_id char(8),
+project_name varchar(16),
 primary key (project_id),
 foreign key (ugroup_id) references Usergroup
 );
@@ -53,6 +57,7 @@ current_status varchar2(16) not null,
 task_description varchar2(280),
 task_date date,
 user_comment varchar2(140),
+task_name varchar2(16),
 primary key (task_id),
 foreign key (user_id) references Account,
 foreign key (project_id) references Project
