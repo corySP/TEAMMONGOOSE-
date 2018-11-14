@@ -1,4 +1,5 @@
 /* add_user: email%TYPE, pass%TYPE, name%TYPE -> void
+
    Expects the eamil, password, and name of a user to be added to the
    accounts table. Returns nothing but has the side effect of adding
    that user to the table with a unique id number */
