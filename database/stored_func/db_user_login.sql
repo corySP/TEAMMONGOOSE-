@@ -5,25 +5,35 @@
     return a 0 */
 
 create or replace function user_login(
-    desired_uid Account.user_id%TYPE,
+    desired_email Account.email_addr%TYPE,
     attempted_pass Account.password%TYPE)
 return integer as
 
 user_count integer;
+returned_uid integer;
 
 begin
 
     select count(*)
     into user_count
     from Account
-    where user_id = desired_uid and
+    where email_addr = desired_email and
+        password = attempted_pass;
+
+    select user_id
+    into returned_uid
+    from Account
+    where email_addr = desired_email and
         password = attempted_pass;
 
     if user_count = 1 then
-        return 1;
+        return returned_uid;
     else
-        return 0;
+        return -1;
     end if;
+exception
+when others then
+    return -1;
 end;
 /
 show errors
@@ -42,11 +52,11 @@ values
 
 prompt calling user_login(666, 'hel1')
 prompt should return 0
-select user_login(666, 'hel1') from dual;
+select user_login('666@satan.gov', 'hel1') from dual;
 
 prompt calling user_login(667, 'jamesbond007')
 prompt should return 1
-select user_login(667, 'jamesbond007') from dual;
+select user_login('ted@us.gov', 'jamesbond007') from dual;
 
 rollback;
 
