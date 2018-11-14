@@ -94,7 +94,6 @@ function create_test()
       	     </fieldset>
 	 </form>
    <?php
-   oci_free_statment($user_email_stmt);
    oci_free_statement($test_query_stmt);
    oci_close($conn);
 
