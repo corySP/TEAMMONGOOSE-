@@ -114,14 +114,34 @@ function show_confirm()
 
 	    oci_free_statement($add_user_stmt);
 	 
-	    // check if added
+    	    $user_check_call = 'begin :in_use := user_check(:user_check_email); end;';
+    	    $user_check_stmt = oci_parse($conn, $user_check_call);
 
+	    oci_bind_by_name($user_check_stmt, ":user_check_email", $newemail);
+	    oci_bind_by_name($user_check_stmt, ":in_use", $in_use, 4);
+
+	    oci_execute($user_check_stmt, OCI_DEFAULT);
+
+	    oci_free_statement($user_check_stmt);
+	    // check if added
 	    oci_close($conn);
+
+	    if ($in_use == 1)
+	    {
 ?>
-	    <p>
-	        Registration successful.
-	    </p>
+		<p>
+	            Registration successful.
+	        </p>
 <?php
+	    }
+	    else
+	    {
+?>
+		<p>
+		    Registration failed.
+		</p>
+<?php
+	    }
 	}
     }
 ?>
