@@ -23,7 +23,7 @@ function show_confirm()
 	$_POST["newname"] = "";
 	$_POST["newemail"] = "";
 	$_POST["newpwd1"] = "";
-	$_POST["newpws2"] = "";
+	$_POST["newpwd2"] = "";
     }    
     elseif ((!array_key_exists("newemail", $_POST)) 
        or ($_POST["newemail"] == "")
@@ -37,7 +37,7 @@ function show_confirm()
 	$_POST["newname"] = "";
 	$_POST["newemail"] = "";
 	$_POST["newpwd1"] = "";
-	$_POST["newpws2"] = "";
+	$_POST["newpwd2"] = "";
     }    
     elseif ((!array_key_exists("newpwd1", $_POST)) 
        	   or ($_POST["newpwd1"] == "")
@@ -53,7 +53,7 @@ function show_confirm()
 <?php
 	$_POST["newemail"] = "";
 	$_POST["newpwd1"] = "";
-	$_POST["newpws2"] = "";
+	$_POST["newpwd2"] = "";
     }
     elseif ($_POST["newpwd1"] != $_POST["newpwd2"])
     {
@@ -65,7 +65,7 @@ function show_confirm()
 	$_POST["newname"] = ""
 	$_POST["newemail"] = "";
 	$_POST["newpwd1"] = "";
-	$_POST["newpws2"] = "";
+	$_POST["newpwd2"] = "";
     }
     
     else
@@ -98,7 +98,7 @@ function show_confirm()
 	    $_POST["newname"] = "";
 	    $_POST["newemail"] = "";
 	    $_POST["newpwd1"] = "";
-	    $_POST["newpws2"] = "";
+	    $_POST["newpwd2"] = "";
 	}
 	else
 	{
