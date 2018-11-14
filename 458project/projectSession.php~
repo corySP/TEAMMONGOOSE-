@@ -24,7 +24,6 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
     <meta charset="utf-8" />
 
     <?php
-    require_once("create_hsu_login.php");
     require_once("create_login.php");
     require_once("create_test.php");
     require_once("hsu_conn_sess.php");
@@ -38,28 +37,24 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
     <h1> Team Project Manager, CS 458 </h1>
 
     <?php
-    //When you are starting Brings up HSU master login
+    //When you are starting
     if ((! array_key_exists('next-stage', $_SESSION)))
        {
            //Creates Loogin form
-           create_hsu_login();
-	   $_SESSION['next-stage'] = "user_login";
+           create_login();
+	   $_SESSION['next-stage'] = "test_data";
        }
-    elseif ($_SESSION['next-stage'] == "user_login")
+    elseif ($_SESSION['next-stage'] == "test_data")
        {
-	   //Creates Form foruser_login
-	   create_login();
-       	   $_SESSION['next-stage'] = "test_login";
-       }
-    elseif ($_SESSION['next-stage'] == "test_login")
-       {
-           create_test();	   
+	   //Creates Form to test data in database
+	   create_test();
+       	   
 	   session_destroy();
 	   session_regenerate_id(TRUE);
 	   session_start();
 
-	   
-	   
+	   create_login();
+	   $_SESSION['next-stage'] = "create_login";
        }
     
 

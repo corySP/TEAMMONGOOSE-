@@ -33,11 +33,6 @@ function create_login()
         destroy_and_exit("must enter a username and password!");
     }
 
-    $master_username = strip_tags($_POST["username"]);
-    $master_password = strip_tags($_POST["password"]);
-
-    $_SESSION["master_username"] = $master_username;
-    $_SESSION["master_password"] = $master_password;
 
 
     // create the desired Oracle log-in form
