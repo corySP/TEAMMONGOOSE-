@@ -1,0 +1,10 @@
+start stored_func/db_add_event.sql
+start stored_func/db_add_group.sql
+start stored_func/db_add_project.sql
+start stored_func/db_add_task.sql
+start stored_func/db_add_user.sql
+start stored_func/db_add_user_to_group.sql
+start stored_func/db_push_event_to_user.sql
+start stored_func/db_update_task_comment.sql
+start stored_func/db_update_task_status.sql
+start stored_func/db_user_login.sql
