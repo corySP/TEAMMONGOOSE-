@@ -8,3 +8,4 @@ start stored_func/db_push_event_to_user.sql
 start stored_func/db_update_task_comment.sql
 start stored_func/db_update_task_status.sql
 start stored_func/db_user_login.sql
+start stored_func/db_user_check.sql
