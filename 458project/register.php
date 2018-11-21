@@ -25,7 +25,7 @@ function show_register()
 	    
             <input type="hidden" name="reg" id="reg" value="yes" />
 	    
-            <input type="submit" value="Submit" />
+            <input type="submit" name="register-submit" value="Submit" />
 	</fieldset>
     </form>
 <?php

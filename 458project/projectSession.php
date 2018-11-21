@@ -7,7 +7,7 @@
 
 <!--
   by: Chadwick Davis
-     last modified: 1-NOV-18
+     last modified: 21-NOV-18
 
      requires:
      *	328footer.html
@@ -16,7 +16,7 @@
      *	destroy_and_exit.php
 
      you can run this using the URL:
-http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
+http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/projectSession.php
 -->
 
 <head>
@@ -26,6 +26,8 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
     <?php
     require_once("create_hsu_login.php");
     require_once("create_login.php");
+    require_once("register.php");
+    require_once("register_confirmation.php");
     require_once("create_test.php");
     require_once("hsu_conn_sess.php");
     require_once("destroy_and_exit.php");
@@ -49,9 +51,28 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
        {
 	   //Creates Form foruser_login
 	   create_login();
-       	   $_SESSION['next-stage'] = "test_login";
+       	   $_SESSION['next-stage'] = "login_options";
        }
-    elseif ($_SESSION['next-stage'] == "test_login")
+    //when you are going to register from user_login
+    elseif (($_SESSION['next-stage'] == "login_options") &&
+           (array_key_exists('register-button', $_POST)))
+       {
+           ///Creates register form
+	   show_register();
+           $_SESSION['next-stage'] = "register_confirmation";
+       }
+    //when you are going to register from user_login
+    elseif (($_SESSION['next-stage'] == "register_confirmation") &&
+           (array_key_exists('register-submit', $_POST)))
+       {
+           ///Creates register confirmation form
+	   create_register_confirmation();
+           $_SESSION['next-stage'] = "user_login";
+       }
+       
+
+    //when you are going to the main page from user_login
+    elseif ($_SESSION['next-stage'] == "login_options")
        {
            create_test();	   
 	   session_destroy();
