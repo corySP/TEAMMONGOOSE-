@@ -23,15 +23,17 @@ function create_login()
 
 function create_login()
 {
+    if ( (!array_key_exists("confirmation-submit", $_POST)))
+     {   
 	 if ( (! array_key_exists("username", $_POST)) or
          (! array_key_exists("password", $_POST)) or
          ($_POST["username"] == "") or
          ($_POST["password"] == "") or
          (! isset($_POST["username"])) or
          (! isset($_POST["password"])) )
-    {
-        destroy_and_exit("must enter a username and password!");
-    }
+   	    {
+              destroy_and_exit("must enter a username and password!");
+   	    }
 
     $master_username = strip_tags($_POST["username"]);
     $master_password = strip_tags($_POST["password"]);
@@ -39,7 +41,7 @@ function create_login()
     $_SESSION["master_username"] = $master_username;
     $_SESSION["master_password"] = $master_password;
 
-
+    }
     // create the desired Oracle log-in form
     ?>
         <form method="post"
@@ -49,8 +51,8 @@ function create_login()
         <?php
         require_once("name-pwd-fieldset.html");
         ?>
-            <input type="submit" id="register-button" value="Register" formnovalidate />
-            <input type="submit" id="submit-button" value="login" />
+            <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
+            <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
         </fieldset>
         </form>
         <?php
