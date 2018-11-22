@@ -23,7 +23,8 @@ function create_login()
 
 function create_login()
 {
-    if ( (!array_key_exists("confirmation-submit", $_POST)))
+    if ( (!array_key_exists("confirmation-submit", $_POST) &&
+         (!array_key_exists("user_log_out", $_POST))))
      {   
 	 if ( (! array_key_exists("username", $_POST)) or
          (! array_key_exists("password", $_POST)) or
