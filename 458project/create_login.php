@@ -24,7 +24,8 @@ function create_login()
 function create_login()
 {
     if ( (!array_key_exists("confirmation-submit", $_POST) &&
-         (!array_key_exists("user_log_out", $_POST))))
+         (!array_key_exists("user_log_out", $_POST)) &&
+	 (!array_key_exists("register-back", $_POST))) )
      {   
 	 if ( (! array_key_exists("username", $_POST)) or
          (! array_key_exists("password", $_POST)) or
@@ -35,6 +36,8 @@ function create_login()
    	    {
               destroy_and_exit("must enter a username and password!");
    	    }
+
+    $_SESSION["current_user"] = "none";    
 
     $master_username = strip_tags($_POST["username"]);
     $master_password = strip_tags($_POST["password"]);
@@ -54,6 +57,7 @@ function create_login()
         ?>
             <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
             <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
+	    <input type="submit" id="exit-button" name="login-exit-button" value="Exit" formnovalidate />
         </fieldset>
         </form>
         <?php
