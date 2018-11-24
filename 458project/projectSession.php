@@ -56,7 +56,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
             (($_SESSION['next-stage'] == "user_logged_in") &&
     	   (array_key_exists('user_log_out', $_POST))))
        {
-	   //Creates Form foruser_login
+	   //Creates Form for user_login
 	   create_login();
        	   $_SESSION['next-stage'] = "login_options";
        }
@@ -69,6 +69,16 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 	   show_register();
            $_SESSION['next-stage'] = "register_confirmation";
        }
+   //when you are returning to the user login from the user registration
+   elseif (($_SESSION['next-stage'] == "register_confirmation") &&
+           (array_key_exists('register-back', $_POST)) )
+       {
+           //Creates Form for user_login
+	   create_login();
+       	   $_SESSION['next-stage'] = "login_options";
+       }
+     
+
     //when you are going to register confirmation from user_login
     elseif (($_SESSION['next-stage'] == "register_confirmation") &&
            (array_key_exists('register-submit', $_POST)))
@@ -77,9 +87,9 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 	   create_register_confirmation();
            $_SESSION['next-stage'] = "user_login";
        }
-       
-    //when you are going to user home page from login
-    //or from either the calendar or file page
+     
+    //When you are going to the home page from any other user page
+    //or the login page.
     elseif ((($_SESSION['next-stage'] == "login_options") &&
     	   (array_key_exists('login-submit-button', $_POST))) ||
 	   (($_SESSION['next-stage'] == "user_logged_in") &&
@@ -112,14 +122,13 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 
 
     //when you are going to the main page from user_login
-    elseif ($_SESSION['next-stage'] == "login_options")
+    elseif ( ($_SESSION['next-stage'] == "login_options") &&
+             (array_key_exists('login-exit-button', $_POST)) )
        {
-           create_test();	   
+           create_hsu_login();	   
 	   session_destroy();
 	   session_regenerate_id(TRUE);
 	   session_start();
- 
-	   
        }
     
 
@@ -134,7 +143,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
         session_regenerate_id(TRUE);
         session_start();
 
-         create_login();
+         create_hsu_login();
         
     }
 
