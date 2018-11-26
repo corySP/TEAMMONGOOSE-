@@ -7,7 +7,7 @@
 
 <!--
   by: Chadwick Davis
-     last modified: 1-NOV-18
+     last modified: 22-NOV-18
 
      requires:
      *	328footer.html
@@ -16,7 +16,7 @@
      *	destroy_and_exit.php
 
      you can run this using the URL:
-http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
+http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/projectSession.php
 -->
 
 <head>
@@ -24,7 +24,13 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
     <meta charset="utf-8" />
 
     <?php
+    require_once("create_hsu_login.php");
     require_once("create_login.php");
+    require_once("register.php");
+    require_once("register_confirmation.php");
+    require_once("user_home_page.php");
+    require_once("user_calendar_page.php");
+    require_once("user_file_page.php");
     require_once("create_test.php");
     require_once("hsu_conn_sess.php");
     require_once("destroy_and_exit.php");
@@ -37,26 +43,83 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/projectSession.php
     <h1> Team Project Manager, CS 458 </h1>
 
     <?php
-    //When you are starting
+    //When you are starting Brings up HSU master login
     if ((! array_key_exists('next-stage', $_SESSION)))
        {
            //Creates Loogin form
            create_login();
-	   $_SESSION['next-stage'] = "test_data";
+	   $_SESSION['next-stage'] = "login_options";
        }
-    elseif ($_SESSION['next-stage'] == "test_data")
+    //When you are going to the user login from the hsu login
+    //Or when you are login out from any of the user pages
+    elseif (($_SESSION['next-stage'] == "user_login")||
+            (($_SESSION['next-stage'] == "user_logged_in") &&
+    	   (array_key_exists('user_log_out', $_POST))))
        {
-	   //Creates Form to test data in database
-	   create_test();
-       	   
-	   session_destroy();
-	   session_regenerate_id(TRUE);
-	   session_start();
-
+	   //Creates Form for user_login
 	   create_login();
-	   $_SESSION['next-stage'] = "create_login";
+       	   $_SESSION['next-stage'] = "login_options";
        }
-    
+      
+    //when you are going to register from user_login
+    elseif (($_SESSION['next-stage'] == "login_options") &&
+           (array_key_exists('register-button', $_POST)))
+       {
+           ///Creates register form
+	   show_register();
+           $_SESSION['next-stage'] = "register_confirmation";
+       }
+   //when you are returning to the user login from the user registration
+   elseif (($_SESSION['next-stage'] == "register_confirmation") &&
+           (array_key_exists('register-back', $_POST)) )
+       {
+           //Creates Form for user_login
+	   create_login();
+       	   $_SESSION['next-stage'] = "login_options";
+       }
+     
+
+    //when you are going to register confirmation from user_login
+    elseif (($_SESSION['next-stage'] == "register_confirmation") &&
+           (array_key_exists('register-submit', $_POST)))
+       {
+           ///Creates register confirmation form
+	   create_register_confirmation();
+           $_SESSION['next-stage'] = "user_login";
+       }
+     
+    //When you are going to the home page from any other user page
+    //or the login page.
+    elseif ((($_SESSION['next-stage'] == "login_options") &&
+    	   (array_key_exists('login-submit-button', $_POST))) ||
+	   (($_SESSION['next-stage'] == "user_logged_in") &&
+	   (array_key_exists('user_to_home', $_POST))))
+	   
+       {
+           ///Generates user home page
+	   create_user_home_page();
+	   $_SESSION['next-stage'] = "user_logged_in";
+       }
+
+
+    //when you are going to user calendar page from either the home page or the file page
+    elseif (($_SESSION['next-stage'] == "user_logged_in") &&
+    	   (array_key_exists('user_to_calendar', $_POST)))
+       {
+           ///Generates user celendar page
+	   create_user_calendar_page();
+	   $_SESSION['next-stage'] = "user_logged_in";
+       }
+
+   //when you are going to user file page from either the home page or the file page
+    elseif (($_SESSION['next-stage'] == "user_logged_in") &&
+    	   (array_key_exists('user_to_files', $_POST)))
+       {
+           ///Generates user file page
+	   create_user_file_page();
+	   $_SESSION['next-stage'] = "user_logged_in";
+       }
+
 
     else
     {
