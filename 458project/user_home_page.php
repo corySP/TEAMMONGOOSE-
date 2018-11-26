@@ -64,6 +64,7 @@ function create_user_home_page()
        	 oci_bind_by_name($login_check_stmt, ":login_check_return",
                           $login_check_return, 4);
 
+         
          oci_bind_by_name($login_check_stmt, ":f_email", $entered_email);
        	 oci_bind_by_name($login_check_stmt, ":f_password", $entered_password);
 
