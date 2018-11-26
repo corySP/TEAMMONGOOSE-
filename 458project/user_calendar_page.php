@@ -3,7 +3,7 @@
 /*======
    function: create_user_calendar_page: void -> void
    purpose: expect nothing, and returns nothing, BUT does
-            expect the $_POST array to contain a key "username"
+            expect the $_SESSION array to contain a key "username"
             with a valid Oracle username, and a key "password"
             with a valid Oracle password;
 =====*/
@@ -19,8 +19,8 @@ function create_user_calendar_page()
 		</fieldset>
 	</form>
 <?php
-	$username = strip_tags(htmlspecialchars($_POST['username']));
-	$password = strip_tags(htmlspecialchars($_POST['password']));
+	$username = strip_tags(htmlspecialchars($_SESSION['username']));
+	$password = strip_tags(htmlspecialchars($_SESSION['password']));
 	$conn = hsu_conn_sess($username, $password);
 
 	$get_tasks_str = 'select project_name, task_name, task_date, current_status, 
