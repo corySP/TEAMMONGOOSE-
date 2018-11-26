@@ -16,6 +16,9 @@ function show_register()
  
             <label for="email"> E-Mail: </label>
             <input type="text" name="newemail" id="newemail" required="required" />
+	    
+	    <label for="email"> Name: </label>
+            <input type="text" name="newname" id="newname" required="required" />
  
             <label for="pwd1"> Password: </label>
             <input type="password" name="newpwd1" id="newpwd1" required="required" />
@@ -24,8 +27,9 @@ function show_register()
             <input type="password" name="newpwd2" id="newpwd2" required="required" />
 	    
             <input type="hidden" name="reg" id="reg" value="yes" />
-	    
-            <input type="submit" value="Submit" />
+
+	    <input type="submit" name="register-back" value="Back" formnovalidate />	    
+            <input type="submit" name="register-submit" value="Submit" />
 	</fieldset>
     </form>
 <?php
