@@ -27,24 +27,17 @@ function create_login()
          (!array_key_exists("user_log_out", $_POST)) &&
 	 (!array_key_exists("register-back", $_POST))) )
      {   
-	 if ( (! array_key_exists("username", $_POST)) or
-         (! array_key_exists("password", $_POST)) or
-         ($_POST["username"] == "") or
-         ($_POST["password"] == "") or
-         (! isset($_POST["username"])) or
-         (! isset($_POST["password"])) )
-   	    {
-              destroy_and_exit("must enter a username and password!");
-   	    }
+   	   
+    $_SESSION["current_user"] = "none";  
 
-    $_SESSION["current_user"] = "none";    
-
+  require_once("hsu_conn.php");  
+  /*
     $master_username = strip_tags($_POST["username"]);
     $master_password = strip_tags($_POST["password"]);
 
     $_SESSION["master_username"] = $master_username;
     $_SESSION["master_password"] = $master_password;
-
+*/
     }
     // create the desired Oracle log-in form
     ?>
@@ -52,12 +45,20 @@ function create_login()
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
         <fieldset>
-        <?php
-        require_once("name-pwd-fieldset.html");
-        ?>
+	 <fieldset>
+         <legend> Enter your username/password:
+         </legend>
+
+      <label class="heading" for="name_entry"> Username: </label>
+      <input type="text" name="username" id="name_entry"
+             required="required" />
+
+      <label class="heading" for="pwd_entry"> Password: </label>
+      <input type="password" name="password" id="pwd_entry"
+                       required="required" />
+          </fieldset>
             <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
             <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
-	    <input type="submit" id="exit-button" name="login-exit-button" value="Exit" formnovalidate />
         </fieldset>
         </form>
         <?php

@@ -64,6 +64,7 @@ function create_user_home_page()
        	 oci_bind_by_name($login_check_stmt, ":login_check_return",
                           $login_check_return, 4);
 
+         
          oci_bind_by_name($login_check_stmt, ":f_email", $entered_email);
        	 oci_bind_by_name($login_check_stmt, ":f_password", $entered_password);
 
@@ -80,12 +81,29 @@ function create_user_home_page()
        	 elseif ( $login_check_return != -1 )
        	 {
              $confirmation_message = "User login sucessfull";
-	      $login_flag = 1;
+             $login_flag = 1;
+             $get_name_str = 'select user_name from Account where user_id = :desired_id';
+             $get_name_stmt = oci_parse($conn, $get_name_str);
+             oci_bind_by_name($get_name_stmt, ":desired_id", $login_check_return); 
+             oci_execute($get_name_stmt, OCI_DEFAULT);
+             oci_fetch($get_name_stmt);
+             $curr_username = oci_result($get_name_stmt, "USER_NAME");
 
-	      $_SESSION["current_user"] = $login_check_return;
+             $_SESSION["current_user"] = $login_check_return;
+
+             // You need to track the username for the chat also this creates a global
+             // javascript variable for the chat username which you will probably have
+             // to do everytime you include the chatbox
+             $_SESSION['current_username'] = $curr_username;
+?>
+             <script type="text/javascript">
+                 var usernameString = '<?php echo $_SESSION['current_username'] ?>';
+             </script>
+<?php
          }
        
-	oci_free_statement($login_check_stmt);
+        oci_free_statement($login_check_stmt);
+        oci_free_statement($get_name_stmt);
        	oci_close($conn);
    	 }
      }
@@ -127,5 +145,6 @@ function create_user_home_page()
         </form>
     <?php
     }
+    require_once('chatbox.php');
 }
 ?>
