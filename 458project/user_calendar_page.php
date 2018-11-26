@@ -3,7 +3,7 @@
 /*======
    function: create_user_calendar_page: void -> void
    purpose: expect nothing, and returns nothing, BUT does
-            expect the $_POST array to contain a key "username"
+            expect the $_SESSION array to contain a key "username"
             with a valid Oracle username, and a key "password"
             with a valid Oracle password;
 =====*/
