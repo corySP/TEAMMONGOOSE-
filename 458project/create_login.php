@@ -27,9 +27,7 @@ function create_login()
          (!array_key_exists("user_log_out", $_POST)) &&
 	 (!array_key_exists("register-back", $_POST))) )
      {   
-	
    	   
-
     $_SESSION["current_user"] = "none";  
 
   require_once("hsu_conn.php");  
