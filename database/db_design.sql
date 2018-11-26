@@ -101,3 +101,28 @@ primary key (event_id, user_id),
 foreign key (event_id) references Event,
 foreign key (user_id) references Account
 );
+
+--Chat_message(MESSAGE_ID, user_name, message_text)
+
+drop table Chat_message cascade constraints;
+create table Chat_message
+(MESSAGE_ID integer not null,
+user_name varchar2(32) not null,
+message_text varchar2(1024),
+primary key (message_id)
+);
+
+drop sequence message_id_seq;
+create sequence message_id_seq;
+
+create or replace trigger ai_message_id
+    before insert 
+    on Chat_message
+    for each row
+begin
+    select message_id_seq.nextval
+    into :new.message_id
+    from dual;
+end;
+/
+show errors
