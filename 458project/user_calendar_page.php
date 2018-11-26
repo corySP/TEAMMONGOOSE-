@@ -19,13 +19,13 @@ function create_user_calendar_page()
 		</fieldset>
 	</form>
 <?php
-	$username = strip_tags(htmlspecialchars($_POST['username']));
-	$password = strip_tags(htmlspecialchars($_POST['password']));
+	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
+	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
 
 	$get_tasks_str = 'select project_name, task_name, task_date, current_status, 
 							 task_description, user_comment
-					  from   Project, Task, User
+					  from   Project, Task, Account
 					  where  Task.user_id = :current_user
 							 and Project.project_id = Task.project_id';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
@@ -49,10 +49,10 @@ function create_user_calendar_page()
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_project_name = oci_result($get_tasks_stmt, 'PROJECT_NAME');
-		$curr_task_name = oci_result($get_tasks-stmt, 'TASK_NAME');
+		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
-		$curr_task_description = oci_result($get_tasks-stmt, 'TASK_DESCRIPTION');
+		$curr_task_description = oci_result($get_tasks_stmt, 'TASK_DESCRIPTION');
 		$curr_user_comment = oci_result($get_tasks_stmt, 'USER_COMMENT');
 		
 		if ($curr_current_status === NULL)
@@ -86,7 +86,7 @@ function create_user_calendar_page()
 	oci_free_statement($get_tasks_stmt);
 	
 	$get_events_str = 'select event_name, event_datetime
-					   from   Event, User, Event_users
+					   from   Event, Account, Event_users
 					   where  Event_users.user_id = :current_user
 							  and Event.event_id = Event_users.event_id';
 	$get_events_stmt = oci_parse($conn, $get_events_str);
@@ -105,7 +105,7 @@ function create_user_calendar_page()
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
-		$curr_event_datetime = oci_resutl($get_events_stmt, 'EVENT_DATETIME');
+		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
 ?>
 		<tr>
 			<td> <?= $curr_event_name ?> </td>
