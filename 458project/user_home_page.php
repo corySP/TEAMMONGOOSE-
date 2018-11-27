@@ -146,5 +146,6 @@ function create_user_home_page()
     <?php
     }
     require_once('chatbox.php');
+    require_once('homepage.php');
 }
 ?>
