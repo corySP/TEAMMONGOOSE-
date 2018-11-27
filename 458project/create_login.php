@@ -30,14 +30,9 @@ function create_login()
    	   
     $_SESSION["current_user"] = "none";  
 
-  require_once("hsu_conn.php");  
-  /*
-    $master_username = strip_tags($_POST["username"]);
-    $master_password = strip_tags($_POST["password"]);
-
-    $_SESSION["master_username"] = $master_username;
-    $_SESSION["master_password"] = $master_password;
-*/
+    require_once("../../_conn.php");  
+    $_SESSION["master_username"] = DB_USER;
+    $_SESSION["master_password"] = DB_PASS;
     }
     // create the desired Oracle log-in form
     ?>
