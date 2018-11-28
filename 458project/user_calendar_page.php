@@ -579,8 +579,8 @@ for (var i = 0; i < js_tasks.length; i++)
                     color: 'green',
                     }]
                 }
-
             tasks_and_events.push(task);
+	    dates.push(currdate);
             }
 }
 
@@ -620,6 +620,7 @@ for (var i = 0; i < js_.length; i++)
                 }
 
             tasks_and_events.push(vevent);
+	    dates.push(currdate);
             }
 }
 
