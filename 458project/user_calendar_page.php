@@ -61,9 +61,9 @@ function create_user_calendar_page()
 			$curr_user_comment = "none";
 		}
 		
-		$row = array($curr_task_date, $curr_project_name, $curr_task_name, $curr_current_status,
+		$row = array($curr_project_name, $curr_task_name, $curr_current_status,
 			     $curr_task_description, $curr_user_comment);
-		array_push($tasks, $row);
+		$tasks[$curr_task_date] = $row
 	}
 
 	oci_free_statement($get_tasks_stmt);
@@ -85,8 +85,7 @@ function create_user_calendar_page()
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
 		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
 		
-		$row = array($curr_event_datetime, $curr_event_name);
-		array_push($events, $row);
+		$events[$curr_event_datetime] = $curr_event_name;
 	}
 
 	oci_free_statement($get_events_stmt);
