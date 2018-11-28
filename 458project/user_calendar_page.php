@@ -134,7 +134,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 ?>
 
      <script src="calendar.js" type="text/javascript"></script>
-     
+     <div calendar class="calendar" id="calendar"></div>
 </body>
 </html>
 
@@ -634,9 +634,10 @@ app.directive('calendar', [function(){
       events: '='
     },
     link: function(scope, element, attributes) {
-      var calendar = new Calendar('#calendar', tasks_and_events);
+      var data = tasks_and_events;
+      var calendar = new Calendar('#calendar', data);
     }
-  }
+  };
 }]);
 </script>
 </body>
