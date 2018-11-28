@@ -625,7 +625,7 @@ for (var i = 0; i < js_.length; i++)
 }
 
 var test = tasks_and_events.toString();
-document.getElementById("test").innerHTML = test 
+document.getElementById("test").innerHTML = test; 
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
