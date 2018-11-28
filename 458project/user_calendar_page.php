@@ -14,6 +14,9 @@
 <body>
 <h1>OUT</h1>
 <?php
+session_start();
+
+
 ini_set('display_errors', 'On');
 ini_set('html_errors', 0);
 
@@ -72,8 +75,6 @@ $old_error_handler = set_error_handler("ErrorHandler");
 ?>
 <h1>IN</h1>
 <?php
-   session_start();
-
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
@@ -82,7 +83,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 	
-	$current_user = $_SESSION["current_user"];
+	$current_user = strip_tags(htmlspecialchars($_SESSION["current_username"]));
 	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	
 	oci_execute($get_tasks_stmt, OCI_DEFAULT);
