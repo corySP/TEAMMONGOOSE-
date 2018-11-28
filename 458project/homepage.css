@@ -142,6 +142,11 @@ h1
 	
 }
 
+.chatLog
+{
+    overflow-y
+}
+
 .chatBox
 {
 	z-index:2;
