@@ -92,6 +92,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 	
 	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+print_r($current_user);
 	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	
 	oci_execute($get_tasks_stmt, OCI_DEFAULT);
@@ -99,6 +100,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
  
 	while (oci_fetch($get_tasks_stmt))
 	{
+echo "loop";
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 				
