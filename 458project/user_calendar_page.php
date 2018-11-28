@@ -624,9 +624,10 @@ for (var i = 0; i < js_.length; i++)
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
-  //alert("pepe")
+  alert("pepe")
 });
 app.directive('calendar', [function(){
+  $window.alert("app");
   return {
     restrict: 'EA',
     scope: {
