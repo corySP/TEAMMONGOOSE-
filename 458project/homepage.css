@@ -126,7 +126,6 @@ button
 	z-index:1;
 	background-color:#FFFFFF;
 	border-top:2px solid #aceace;
-	overflow-y:scroll;
 	
 }
 
@@ -140,6 +139,11 @@ h1
 	margin-left: 20px;
 	color: #aceace;
 	
+}
+
+.chatLog
+{
+	overflow-y:scroll;
 }
 
 .chatBox

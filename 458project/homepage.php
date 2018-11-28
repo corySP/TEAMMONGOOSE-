@@ -24,7 +24,7 @@
     </script>
 
     <div id="titlebar" class="titlebar">
-        <a href="JavaScript:popup('/user_calendar_page.php')">WEASELCHAT</a>
+        <a href="JavaScript:popup('./user_calendar_page.php')">WEASELCHAT</a>
         
     </div>  
     <hr />
