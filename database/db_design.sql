@@ -126,3 +126,38 @@ begin
 end;
 /
 show errors
+
+--Hangman_game(HANG_ID, word, current_progress, level)
+
+drop table Hangman cascade constraints;
+create table Hangman
+(HANG_ID integer not null,
+word varchar2(32) not null,
+current_progress varchar2(32) not null,
+hang_level integer not null,
+complete integer not null,
+primary key (hang_id)
+);
+
+drop sequence hang_id_seq;
+create sequence hang_id_seq;
+
+create or replace trigger ai_hang_id
+    before insert
+    on Hangman
+    for each row
+begin
+    select hang_id_seq.nextval
+    into :new.hang_id
+    from dual;
+
+    select 0
+    into :new.hang_level
+    from dual;
+
+    select 0
+    into :new.complete
+    from dual;
+end;
+/
+show errors
