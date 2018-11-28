@@ -81,7 +81,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1>IN</h1>
+<h1 id="test"></h1>
 <?php
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
@@ -131,9 +131,6 @@ $current_user = 00000001;
  
  	$js_tasks = json_encode($tasks);
  	$js_events = json_encode($events);
- 
- 	print_r($js_tasks);
- 	echo $js_events;
 
 ?>
 
@@ -625,6 +622,9 @@ for (var i = 0; i < js_.length; i++)
             tasks_and_events.push(vevent);
             }
 }
+
+var test = tasks_and_events.toString();
+document.getElementById("test").innerHTML = test 
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
