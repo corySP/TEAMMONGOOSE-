@@ -17,14 +17,20 @@
 </head>
 
 <body> 	
+	<script type="text/javascript">
+	function popup(url) {
+		popupWindow = window.open(url, 'popupWindow', 'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=no, menubar=no, location=no, directories=no, status=yes')
+}
+	</script>
+
 	<div id="titlebar" class="titlebar">
-		<h1>WEASELCHAT<h1>
-		<input id="calendar" type="button" class="calendar" name="calendar" >
+		<a href="JavaScript:popup('/user_calendar_page.php')">WEASELCHAT</a>
+		
 	</div>	
 	<hr />
 
 	<div class="groupbar">
-		<a href="#group1">Group 1</a>	
+		<a href="homepage.php#group1">Group 1</a>	
 		<a href="homepage.php#group2">Group 2</a>
 		<a href="homepage.php#group3">Group 3</a>
 	</div>

@@ -3,6 +3,6 @@
 
 
 
-$('#title').click(function() {
-	$('#titlebar').toggle('slow', function());
+$('#calendar').click(function() {
+	$('#calendar').toggle('slow', function());
 });
