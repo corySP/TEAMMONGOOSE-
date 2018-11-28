@@ -86,7 +86,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
-	$get_tasks_str = 'select task_date, task_name
+	$get_tasks_str = 'select day(task_date), month(task_date), year(task_date), task_name
 					  from   Task, Account
 					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
@@ -102,15 +102,17 @@ $current_user = 00000001;
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
-		$curr_task_date = (string)(oci_result($get_tasks_stmt, 'TASK_DATE'));
+		$curr_task_day = (string)(oci_result($get_tasks_stmt, 'DAY_TASK_DATE'));
+		$curr_task_month = (string)(oci_result($get_tasks_stmt, 'MONTH_TASK_DATE'));
+		$curr_task_year = (string)(oci_result($get_tasks_stmt, 'YEAR_TASK_DATE'));
 				
-		$row = array($curr_task_date, $curr_task_name);
+		$row = array($curr_task_day, $curr_task_month, $curr_task_year, $curr_task_name);
 
 		array_push($tasks, $row);
 	}
 	oci_free_statement($get_tasks_stmt);
 	
-	$get_events_str = 'select event_name, event_datetime
+	$get_events_str = 'select event_name, day(event_datetime), month(event_datetime), year(event_datetime)
 					   from   Event, Account, Event_users
 					   where  Event_users.user_id = :current_user
 							  and Event.event_id = Event_users.event_id';
@@ -123,8 +125,12 @@ $current_user = 00000001;
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
-		$curr_event_datetime = (string)(oci_result($get_events_stmt, 'EVENT_DATETIME'));
-		$row = array($curr_event_datetime, $curr_event_name);
+
+		$curr_event_day = (string)(oci_result($get_tasks_stmt, 'DAY_EVENT_DATETIME'));
+		$curr_event_month = (string)(oci_result($get_tasks_stmt, 'MONTH_EVENT_DATETIME'));
+		$curr_event_year = (string)(oci_result($get_tasks_stmt, 'YEAR_EVENT_DATETIME'));
+
+		$row = array($curr_event_day, $curr_event_month, $curr_event_year, $curr_event_name);
 		array_push($events, $row);
 	}
 	oci_free_statement($get_events_stmt);
@@ -547,13 +553,10 @@ var dates = [];
 
 for (var i = 0; i < js_tasks.length; i++)
 {
-    var currdate = js_tasks[i][0];
-
-    var date_conversion = currdate.split("-");
-    var year = parseInt(date_conversion[0]);
-    var month = parseInt(date_conversion[1]);
-    var day = parseInt(date_conversion[2]);
-    var converted_date = new Date(year, month, day);
+    var day = js_tasks[i][0];
+    var month = (js_tasks[i][1]) - 1;
+    var year = js_tasks[i][2];
+    currdate = new Date(year, month, day);
 
 document.getElementById("test").innerHTML = currdate; 
 
@@ -561,7 +564,7 @@ document.getElementById("test").innerHTML = currdate;
         {
             for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                    if (tasks_and_events[j].date == converted_date)
+                    if (tasks_and_events[j].date == currdate)
                         {
                             tasks_and_events[j].events.push({
                                  name: js_tasks[i][1],
@@ -574,7 +577,7 @@ document.getElementById("test").innerHTML = currdate;
     else
         {
             var task = {
-                date: converted_date,
+                date: currdate,
                 events: [{
                     name: js_tasks[i][1],
                     type: 'task',
@@ -588,19 +591,16 @@ document.getElementById("test").innerHTML = currdate;
 
 for (var i = 0; i < js_.length; i++)
 {
-    var currdate = js_events[i][0];
-
-    var date_conversion = currdate.split("-");
-    var year = date_conversion[0];
-    var month = date_conversion[1];
-    var day = (date_conversion[2].split(":"))[0];
-    var converted_date = new Date(year, month, day);
+    var day = js_events[i][0];
+    var month = (js_events[i][1]) - 1;
+    var year = js_events[i][2];
+    currdate = new Date(year, month, day);
 
     if (dates.includes(currdate))
         {
             for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                    if (tasks_and_events[j].date == converted_date)
+                    if (tasks_and_events[j].date == currdate)
                         {
                             tasks_and_events[j].events.push({
                                  name: js_events[i][1],
@@ -613,7 +613,7 @@ for (var i = 0; i < js_.length; i++)
     else
         {
             var vevent = {
-                date: converted_date,
+                date: currdate,
                 events: [{
                     name: js_events[i][1],
                     type: 'event',
