@@ -378,7 +378,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   Calendar.prototype.openDay = function(el) {
     var details, arrow;
-    var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-numbertextContent;
+    var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
     var day = this.current.clone().date(dayNumber);
 
     var currentOpened = document.querySelector('.details');
@@ -556,7 +556,7 @@ for (var i = 0; i < js_tasks.length; i++)
 
     if (dates.includes(currdate))
         {
-            for (var j = 0; j < tasks_and_events.length, j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
@@ -595,7 +595,7 @@ for (var i = 0; i < js_.length; i++)
 
     if (dates.includes(currdate))
         {
-            for (var j = 0; j < tasks_and_events.length, j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
