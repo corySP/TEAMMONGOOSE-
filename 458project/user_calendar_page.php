@@ -555,7 +555,7 @@ for (var i = 0; i < js_tasks.length; i++)
     var day = parseInt(date_conversion[2]);
     var converted_date = new Date(year, month, day);
 
-document.getElementById("test").innerHTML = converted_date; 
+document.getElementById("test").innerHTML = currdate; 
 
     if (dates.includes(currdate))
         {
