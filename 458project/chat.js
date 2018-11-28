@@ -4,8 +4,14 @@ $(document).ready( function() {
     var refreshInterval = 10000;
     var $chatTextInput = $("#chatTextInput");
     var $messageSendBtn = $("#chatMessageSend");
-
+    var $chatform = $("#chatform");
+/*
     $messageSendBtn.click( function() {
+        sendMessage();
+    });
+*/
+
+    $chatform.submit( function() {
         sendMessage();
     });
 
@@ -121,7 +127,7 @@ function getHangman() {
             }
 
             html += '</pre> </div>';
-            html += '<div> <b> ' + result.word + result.prog + result.level + result.complete +'</b></div>';
+            //html += '<div> <b> ' + result.word + result.prog + result.level + result.complete +'</b></div>';
         }
         $chatLog.append(html);
     });
