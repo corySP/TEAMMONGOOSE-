@@ -128,12 +128,12 @@ function create_user_home_page()
     	else  
     	{    
 
+	/*======
         ?>
         <form method="post"
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
         <?php
-	/*======
 	 <fieldset>
           <legend> User Home Page:
            </legend>
@@ -148,7 +148,6 @@ function create_user_home_page()
        ?>
     <?php
     }
-    require_once('chatbox.php');
     require_once('homepage.php');
 }
 ?>

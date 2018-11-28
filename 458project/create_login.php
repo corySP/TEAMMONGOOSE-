@@ -27,33 +27,12 @@ function create_login()
          (!array_key_exists("user_log_out", $_POST)) &&
 	 (!array_key_exists("register-back", $_POST))) )
      {   
-<<<<<<< HEAD
-	 if ( (! array_key_exists("username", $_POST)) or
-         (! array_key_exists("password", $_POST)) or
-         ($_POST["username"] == "") or
-         ($_POST["password"] == "") or
-         (! isset($_POST["username"])) or
-         (! isset($_POST["password"])) )
-   	    {
-              destroy_and_exit("must enter a username and password!");
-   	    }
-
-    $_SESSION["current_user"] = "none";    
-
-    $master_username = strip_tags($_POST["username"]);
-    $master_password = strip_tags($_POST["password"]);
-
-    $_SESSION["master_username"] = $master_username;
-    $_SESSION["master_password"] = $master_password;
-
-=======
    	   
     $_SESSION["current_user"] = "none";  
 
     require_once("../../_conn.php");  
     $_SESSION["master_username"] = DB_USER;
     $_SESSION["master_password"] = DB_PASS;
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
     }
     // create the desired Oracle log-in form
     ?>
@@ -61,14 +40,6 @@ function create_login()
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
         <fieldset>
-<<<<<<< HEAD
-        <?php
-        require_once("name-pwd-fieldset.html");
-        ?>
-            <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
-            <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
-	    <input type="submit" id="exit-button" name="login-exit-button" value="Exit" formnovalidate />
-=======
 	 <fieldset>
          <legend> Enter your username/password:
          </legend>
@@ -83,7 +54,6 @@ function create_login()
           </fieldset>
             <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
             <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
         </fieldset>
         </form>
         <?php
