@@ -8,6 +8,10 @@
      <link href="homepage.css" type="text/css" rel="stylesheet" />
      <link href="calendar.css" type="text/css" rel="stylesheet" />
 
+     <?php
+	 require_once("hsu_conn_sess.php");
+     ?>
+
      <script src="calendar.js" type="text/javascript"> </script>
 </head>
 
