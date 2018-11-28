@@ -69,8 +69,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle username, and a key "password"
             with a valid Oracle password;
 =====*/
-function create_user_calendar_page()
-{
+//function create_user_calendar_page()
+//{
 ?>
 <h1>IN</h1>
 <?php
@@ -122,7 +122,7 @@ function create_user_calendar_page()
  
  	echo $js_tasks;
  	echo $js_events;
-}
+//}
 ?>
 </body>
 </html>
