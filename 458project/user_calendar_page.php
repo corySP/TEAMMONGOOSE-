@@ -1,4 +1,3 @@
-
 <?php
 /*======
    function: create_user_calendar_page: void -> void
