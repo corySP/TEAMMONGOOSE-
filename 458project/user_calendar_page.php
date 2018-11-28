@@ -36,30 +36,10 @@ function create_user_calendar_page()
  
 	while (oci_fetch($get_tasks_stmt))
 	{
-		$curr_project_name = oci_result($get_tasks_stmt, 'PROJECT_NAME');
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
-		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
-		$curr_task_description = oci_result($get_tasks_stmt, 'TASK_DESCRIPTION');
-		$curr_user_comment = oci_result($get_tasks_stmt, 'USER_COMMENT');
-		
-		if ($curr_current_status === NULL)
-		{
-			$curr_current_status = "none";
-		}
-		
-		if ($curr_task_description === NULL)
-		{
-			$curr_task_description = "none";
-		}
-		
-		if ($curr_user_comment === NULL)
-		{
-			$curr_user_comment = "none";
-		}
-		
-		$row = array($curr_task_date, $curr_project_name, $curr_task_name, $curr_current_status,
-			     $curr_task_description, $curr_user_comment);
+				
+		$row = array($curr_task_date, $curr_task_name);
 		array_push($tasks, $row);
 	}
 	oci_free_statement($get_tasks_stmt);
