@@ -13,24 +13,32 @@
 </head>
 
 <body>
-        <input type="button" onclick="location.href='...'" value="SETTINGS" />
-	<input type="button" onclick="location.href='...'" value="CALENDAR" />
-	<input type="button" onclick="location.href='...'" value="FILEVIEW" />
-	
-	<h1> WEASELCHAT </h1>	
+	<div class="titlebar">
+		<a href="homepage.php#title">WEASELCHAT</a>
+	</div>	
+
 	<hr />
+
 	<div class="groupbar">
-		<a href="#group1">Group 1</a>	
-		<a href="#group2">Group 2</a>
-		<a href="#group3">Group 3</a>
+		<a href="homepage.php#group1">Group 1</a>	
+		<a href="homepage.php#group2">Group 2</a>
+		<a href="homepage.php#group3">Group 3</a>
 	</div>
 	
 	<div class="main">
 		<h2> Welcome to the weasel/mongoose file chat calendar scheduling website!
 </h2>
-
+	<!--remove the next line once chatbow is working-->
+	
+		
+	</div>
+	<div class="memberbar">
+		<a href="homepage.php#name1">name1</a>
+		<a href="homepage.php#naem2">name2</a>
 	</div>
 	<div class="chatbar">
+		<?php require_once('chatbox.php');?>
 	</div>
+
 </body>
 </html>
