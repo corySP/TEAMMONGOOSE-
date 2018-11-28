@@ -549,13 +549,13 @@ for (var i = 0; i < js_tasks.length; i++)
 {
     var currdate = js_tasks[i][0];
 
-document.getElementById("test").innerHTML = (typeof currdate); 
-
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
     var month = date_conversion[1];
     var day = date_conversion[2];
     var converted_date = new Date(year, month, day);
+
+document.getElementById("test").innerHTML = converted_date; 
 
     if (dates.includes(currdate))
         {
