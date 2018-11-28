@@ -122,8 +122,6 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 	   create_user_file_page();
 	   $_SESSION['next-stage'] = "user_logged_in";
        }
-
-
     else
     {
       ?>
@@ -136,6 +134,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
         session_start();
 
          create_login();
+
         $_SESSION['next-stage'] = "login_options";
     }
 

@@ -78,7 +78,6 @@ function create_user_calendar_page()
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
 		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
-		
 		$row = array($curr_event_datetime, $curr_event_name);
 		array_push($events, $row);
 	}
