@@ -133,7 +133,9 @@ function create_user_home_page()
         <form method="post"
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
-         <fieldset>
+        <?php
+	/*======
+	 <fieldset>
           <legend> User Home Page:
            </legend>
 
@@ -143,6 +145,8 @@ function create_user_home_page()
 	    <input type="submit" name="user_to_files" value="Files" formnovalidate />	    
           </fieldset>
         </form>
+       =======*/
+       ?>
     <?php
     }
     require_once('chatbox.php');
