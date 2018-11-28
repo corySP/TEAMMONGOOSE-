@@ -19,13 +19,22 @@ function create_user_calendar_page()
 		</fieldset>
 	</form>
 <?php
+<<<<<<< HEAD
+	$username = strip_tags(htmlspecialchars($_SESSION['username']));
+	$password = strip_tags(htmlspecialchars($_SESSION['password']));
+=======
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 	$conn = hsu_conn_sess($username, $password);
 
 	$get_tasks_str = 'select project_name, task_name, task_date, current_status, 
 							 task_description, user_comment
+<<<<<<< HEAD
+					  from   Project, Task, User
+=======
 					  from   Project, Task, Account
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 					  where  Task.user_id = :current_user
 							 and Project.project_id = Task.project_id';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
@@ -49,10 +58,17 @@ function create_user_calendar_page()
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_project_name = oci_result($get_tasks_stmt, 'PROJECT_NAME');
+<<<<<<< HEAD
+		$curr_task_name = oci_result($get_tasks-stmt, 'TASK_NAME');
+		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
+		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
+		$curr_task_description = oci_result($get_tasks-stmt, 'TASK_DESCRIPTION');
+=======
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
 		$curr_task_description = oci_result($get_tasks_stmt, 'TASK_DESCRIPTION');
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 		$curr_user_comment = oci_result($get_tasks_stmt, 'USER_COMMENT');
 		
 		if ($curr_current_status === NULL)
@@ -86,7 +102,11 @@ function create_user_calendar_page()
 	oci_free_statement($get_tasks_stmt);
 	
 	$get_events_str = 'select event_name, event_datetime
+<<<<<<< HEAD
+					   from   Event, User, Event_users
+=======
 					   from   Event, Account, Event_users
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 					   where  Event_users.user_id = :current_user
 							  and Event.event_id = Event_users.event_id';
 	$get_events_stmt = oci_parse($conn, $get_events_str);
@@ -105,7 +125,11 @@ function create_user_calendar_page()
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
+<<<<<<< HEAD
+		$curr_event_datetime = oci_resutl($get_events_stmt, 'EVENT_DATETIME');
+=======
 		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 ?>
 		<tr>
 			<td> <?= $curr_event_name ?> </td>

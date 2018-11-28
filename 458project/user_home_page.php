@@ -64,7 +64,10 @@ function create_user_home_page()
        	 oci_bind_by_name($login_check_stmt, ":login_check_return",
                           $login_check_return, 4);
 
+<<<<<<< HEAD
+=======
          
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
          oci_bind_by_name($login_check_stmt, ":f_email", $entered_email);
        	 oci_bind_by_name($login_check_stmt, ":f_password", $entered_password);
 
@@ -81,6 +84,14 @@ function create_user_home_page()
        	 elseif ( $login_check_return != -1 )
        	 {
              $confirmation_message = "User login sucessfull";
+<<<<<<< HEAD
+	      $login_flag = 1;
+
+	      $_SESSION["current_user"] = $login_check_return;
+         }
+       
+	oci_free_statement($login_check_stmt);
+=======
              $login_flag = 1;
              $get_name_str = 'select user_name from Account where user_id = :desired_id';
              $get_name_stmt = oci_parse($conn, $get_name_str);
@@ -104,6 +115,7 @@ function create_user_home_page()
        
         oci_free_statement($login_check_stmt);
         oci_free_statement($get_name_stmt);
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
        	oci_close($conn);
    	 }
      }
@@ -145,6 +157,10 @@ function create_user_home_page()
         </form>
     <?php
     }
+<<<<<<< HEAD
+=======
     require_once('chatbox.php');
+    require_once('homepage.php');
+>>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 }
 ?>
