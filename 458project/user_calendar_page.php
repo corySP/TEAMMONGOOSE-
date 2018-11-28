@@ -21,11 +21,9 @@ function create_user_calendar_page()
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
-	$get_tasks_str = 'select project_name, task_name, task_date, current_status, 
-							 task_description, user_comment
-					  from   Project, Task, Account
-					  where  Task.user_id = :current_user
-							 and Project.project_id = Task.project_id';
+	$get_tasks_str = 'select task_date, task_name
+					  from   Task, Account
+					  where  Task.user_id = :current_user;
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 	
 	$current_user = $_SESSION["current_user"];
