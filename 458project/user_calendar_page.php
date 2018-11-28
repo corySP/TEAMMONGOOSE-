@@ -587,6 +587,7 @@ for (var i = 0; i < js_tasks.length; i++)
 for (var i = 0; i < js_.length; i++)
 {
     var currdate = js_events[i][0];
+document.getElementById("test").innerHTML = currdate; 
 
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
@@ -625,7 +626,6 @@ for (var i = 0; i < js_.length; i++)
 }
 
 var test = tasks_and_events.toString();
-document.getElementById("test").innerHTML = test; 
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
