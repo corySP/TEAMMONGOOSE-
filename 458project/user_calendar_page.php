@@ -528,7 +528,7 @@ var month;
  
 
     var converted_date = new Date(year, month, day);
-document.getElementById("test").innerHTML = month; 
+document.getElementById("test").innerHTML = currdate; 
     if (dates.includes(currdate))
         {
             for (var j = 0; j < tasks_and_events.length; j++)
