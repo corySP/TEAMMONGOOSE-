@@ -6,9 +6,18 @@ hr
 
 input
 {
+	//float:right;	
+	border:1px solid #FFFFFF;
+	padding: 10px 20px;
+	
+}
+
+#chatTextInput
+{
 	float:right;	
 	border:1px solid #FFFFFF;
 	padding: 10px 20px;
+    width:40%;
 	
 }
 
@@ -116,7 +125,8 @@ button
 
 .chatbar
 {
-	height:122px;
+	//height:200px;
+    height:22em;
 	width:50%;
 	position:absolute;
 	margin-left:145px;
@@ -141,17 +151,24 @@ h1
 	
 }
 
-.chatLog
+#chatLog
 {
-	overflow-y:scroll;
+    height:19em;
+	overflow-y:auto;
 }
 
-.chatBox
+#contents
+{
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/*.chatBox
 {
 	z-index:2;
 	position:fixed;
 	margin-top:86px;
 	margin-right:0;	
-		
-}
+}*/
 

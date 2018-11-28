@@ -5,6 +5,7 @@ $(document).ready( function() {
     var $chatTextInput = $("#chatTextInput");
     var $messageSendBtn = $("#chatMessageSend");
     var $chatform = $("#chatform");
+    var $chatLog = $("#chatLog");
 /*
     $messageSendBtn.click( function() {
         sendMessage();
@@ -20,6 +21,7 @@ $(document).ready( function() {
     }, refreshInterval);
 
     retrieveMessages();
+    $chatLog.scrollTop($chatLog[0].scrollHeight);
 });
     
 function sendMessage() {
@@ -50,7 +52,7 @@ function sendMessage() {
         $.get("./write.php", {
             text: chatTextString
         }, function(data){
-            retrieveMessages();
+            retrieveMessagesPostInsert();
         });
     }
 
@@ -130,6 +132,7 @@ function getHangman() {
             //html += '<div> <b> ' + result.word + result.prog + result.level + result.complete +'</b></div>';
         }
         $chatLog.append(html);
+        $chatLog.scrollTop($chatLog[0].scrollHeight);
     });
 }
  
@@ -147,5 +150,23 @@ function retrieveMessages() {
             lastID = result.id;
         }
         $chatLog.append(html);
+    });
+}
+
+function retrieveMessagesPostInsert() {
+    $.get("./read.php?lastID=" + lastID, function(data) {
+        var $chatLog = $("#chatLog");
+        var jsonData = JSON.parse(data);
+        var html = "";
+
+        for (var i=0; i<jsonData.results.length; i++)
+        {
+            var result = jsonData.results[i];
+            html += '<div class="chatMessage"> <b>' + result.username
+                    + '</b>: ' + result.text + '</div>';
+            lastID = result.id;
+        }
+        $chatLog.append(html);
+        $chatLog.scrollTop($chatLog[0].scrollHeight);
     });
 }
