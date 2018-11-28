@@ -72,6 +72,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
 ?>
 <h1>IN</h1>
 <?php
+   session_start();
+
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
