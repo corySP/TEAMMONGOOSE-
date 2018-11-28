@@ -63,7 +63,6 @@ function create_user_home_page()
 
        	 oci_bind_by_name($login_check_stmt, ":login_check_return",
                           $login_check_return, 4);
-
          
          oci_bind_by_name($login_check_stmt, ":f_email", $entered_email);
        	 oci_bind_by_name($login_check_stmt, ":f_password", $entered_password);
@@ -129,11 +128,13 @@ function create_user_home_page()
     	else  
     	{    
 
+	/*======
         ?>
         <form method="post"
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
-         <fieldset>
+        <?php
+	 <fieldset>
           <legend> User Home Page:
            </legend>
 
@@ -143,8 +144,10 @@ function create_user_home_page()
 	    <input type="submit" name="user_to_files" value="Files" formnovalidate />	    
           </fieldset>
         </form>
+       =======*/
+       ?>
     <?php
     }
-    require_once('chatbox.php');
+    require_once('homepage.php');
 }
 ?>

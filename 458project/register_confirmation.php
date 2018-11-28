@@ -82,7 +82,6 @@ function create_register_confirmation()
 	    $add_user_str = 'begin add_user(:p_email, :p_password, :p_name); end;';
 	    $add_user_stmt = oci_parse($conn, $add_user_str);
 
-	    
 	    oci_bind_by_name($add_user_stmt, ":p_email", $user_email);
 	    oci_bind_by_name($add_user_stmt, ":p_password", $user_password);
 	    oci_bind_by_name($add_user_stmt, ":p_name", $user_name);
