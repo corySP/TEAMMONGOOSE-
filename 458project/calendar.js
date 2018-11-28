@@ -418,7 +418,7 @@ for (var i = 0; i < js_tasks.length; i++)
 			    tasks_and_events[j].events.push({
 				 name: js_tasks[i][1],
 				 type: 'task',
-				 color: 'blue',
+				 color: 'green',
 				})
 			    }
 		    }
@@ -430,7 +430,7 @@ for (var i = 0; i < js_tasks.length; i++)
 		events: [{
 		    name: js_tasks[i][1],
 		    type: 'task',
-		    color: 'blue',
+		    color: 'green',
 		    }]
 		}
 	    

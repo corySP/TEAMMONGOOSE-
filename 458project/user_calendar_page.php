@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+     <title> Your Calendar </title>
+     <meta charset="utf-8" />
+
+     <link href="homepage.css" type="text/css" rel="stylesheet" />
+     <link href="calendar.css" type="text/css" rel="stylesheet" />
+
+     <script src="calendar.js" type="text/javascript"> </script>
+</head>
+
+<body>
 <?php
 /*======
    function: create_user_calendar_page: void -> void
