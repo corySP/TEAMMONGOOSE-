@@ -538,10 +538,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 /****************************/
-document.getElementById("test").innerHTML = 5 + 6; 
 
-var js_tasks = JSON.parse(<?php echo $js_tasks; ?>);
+var js_tasks = <?php echo $js_tasks; ?>;
 var js_events = JSON.parse('<?php echo $js_events; ?>');
+document.getElementById("test").innerHTML = js_tasks; 
 
 var tasks_and_events = [];
 var dates = [];
