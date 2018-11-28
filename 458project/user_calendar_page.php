@@ -103,6 +103,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 				
 		$row = array($curr_task_date, $curr_task_name);
+print_r($curr_task_name);     
+ print_r($row);
 		array_push($tasks, $row);
 	}
 	oci_free_statement($get_tasks_stmt);
