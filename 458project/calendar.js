@@ -180,11 +180,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       var size = (1 / this.maxEvents) * todayEvents.events.length;
       circle.style.webkitTransform = 'scale(' + size + ')';
       circle.style.MozProperty = 'scale(' + size + ')';
-      circle.style.transform = 'scale(' + size + ')';      
+      circle.style.transform = 'scale(' + size + ')';
     } else {
       circle.style.webkitTransform = 'scale(0, 0)';
       circle.style.MozProperty = 'scale(0, 0)';
-      circle.style.transform = 'scale(0, 0)';      
+      circle.style.transform = 'scale(0, 0)';
       outer.style.cursor = 'default';
     }
 
@@ -393,8 +393,89 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 
-var tasks = JSON.parse('<?= $js_tasks; ?>');
-var events = JSON.parse('<?= $js_events; ?>');
+var js_tasks = JSON.parse('<?= $js_tasks; ?>');
+var js_events = JSON.parse('<?= $js_events; ?>');
+
+var tasks_and_events = [];
+var dates = [];
+
+for (var i = 0; i < js_tasks.length; i++)
+{
+    var currdate = js_tasks[i][0];
+    
+    var date_conversion = currdate.split("-");
+    var year = date_conversion[0];
+    var month = date_conversion[1];
+    var day = date_conversion[2];
+    var converted_date = new Date(year, month, day);
+    
+    if (dates.includes(currdate))
+	{
+	    for (var j = 0; j < tasks_and_events.length, j++)
+		{
+		    if (tasks_and_events[j].date == converted_date)
+			{
+			    tasks_and_events[j].events.push({
+				 name: js_tasks[i][1],
+				 type: 'task',
+				 color: 'blue',
+				})
+			    }
+		    }
+	    }
+    else
+	{
+	    var task = {
+		date: converted_date,
+		events: [{
+		    name: js_tasks[i][1],
+		    type: 'task',
+		    color: 'blue',
+		    }]
+		}
+	    
+	    tasks_and_events.push(task);
+	    }
+}
+
+for (var i = 0; i < js_.length; i++)
+{
+    var currdate = js_events[i][0];
+    
+    var date_conversion = currdate.split("-");
+    var year = date_conversion[0];
+    var month = date_conversion[1];
+    var day = date_conversion[2];
+    var converted_date = new Date(year, month, day);
+    
+    if (dates.includes(currdate))
+	{
+	    for (var j = 0; j < tasks_and_events.length, j++)
+		{
+		    if (tasks_and_events[j].date == converted_date)
+			{
+			    tasks_and_events[j].events.push({
+				 name: js_events[i][1],
+				 type: 'event',
+				 color: 'pink',
+				})
+			    }
+		    }
+	    }
+    else
+	{
+	    var vevent = {
+		date: converted_date,
+		events: [{
+		    name: js_events[i][1],
+		    type: 'event',
+		    color: 'pink',
+		    }]
+		}
+	    
+	    tasks_and_events.push(vevent);
+	    }
+}
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
@@ -408,100 +489,7 @@ app.directive('calendar', [function(){
       events: '='
     },
     link: function(scope, element, attributes) {
-      var 
-
-      var data = [{
-        date: new Date(2017, 0, 1),
-        events: [{
-          name: 'smokeloader',
-          type: 'bot',
-          color: 'orange'
-        }]
-      }, {
-        date: new Date(2017, 0, 2),
-        events: [{
-          name: 'zeus',
-          type: 'bot',
-          color: 'blue'
-        }]
-      }, {
-        date: new Date(2017, 0, 3),
-        events: [{
-          name: 'ponyloader',
-          type: 'bot',
-          color: 'yellow'
-        }, {
-          name: 'aldibot',
-          type: 'bot',
-          color: 'yellow'
-        }, {
-          name: 'dirtjumper',
-          type: 'malware',
-          color: 'yellow'
-        }]
-      }, {
-        date: new Date(2017, 0, 4),
-        events: [{
-          name: 'andromeda',
-          type: 'bot',
-          color: 'green'
-        }]
-      }, {
-        date: new Date(2017, 0, 5),
-        events: [{
-          name: 'conficker',
-          type: 'bot',
-          color: 'orange'
-        }, {
-          name: 'umbraloader',
-          type: 'bot',
-          color: 'orange'
-        }]
-      }, {
-        date: new Date(2017, 0, 17),
-        events: [{
-          name: 'aldibot',
-          type: 'bot',
-          color: 'pink'
-        }]
-      }, {
-        date: new Date(2017, 0, 2),
-        events: [{
-          name: 'zeus',
-          type: 'bot',
-          color: 'blue'
-        }]
-      }, {
-        date: new Date(2017, 0, 18),
-        events: [{
-          name: 'ponyloader',
-          type: 'bot',
-          color: 'yellow'
-        }, {
-          name: 'aldibot',
-          type: 'bot',
-          color: 'yellow'
-        }, {
-          name: 'dirtjumper',
-          type: 'malware',
-          color: 'yellow'
-        }]
-      }, , {
-        date: new Date(2017, 0, 19),
-        events: [{
-          name: 'zeus',
-          type: 'bot',
-          color: 'blue'
-        }]
-      }, {
-        date: new Date(2017, 0, 19),
-        events: [{
-          name: 'ponyloader',
-          type: 'bot',
-          color: 'yellow'
-        }]
-      }]
-      var calendar = new Calendar('#calendar', data);
+      var calendar = new Calendar('#calendar', tasks_and_events);
     }
   }
 }]);
