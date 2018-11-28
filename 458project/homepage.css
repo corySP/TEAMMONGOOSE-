@@ -12,6 +12,19 @@ input
 	
 }
 
+.calendar
+{
+	left:37%;
+	position:fixed;
+	
+	border: none;
+	top:21px;
+	width:250px;
+	height:50px;
+	z-index:2;
+	
+}
+
 button
 {
 	background-color: #aceace;
@@ -71,7 +84,7 @@ button
 .memberbar
 {
 	height: 100%;
-	width: 100px;
+	width: 98px;
 	position:fixed;
 	z-index:2;
 	top:96px;
@@ -137,6 +150,7 @@ body
 }
 h1
 {
+	text-align:center;
 	margin-left: 20px;
 	color: #aceace;
 	
