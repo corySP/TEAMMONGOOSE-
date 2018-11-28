@@ -90,6 +90,12 @@ function create_user_calendar_page()
 	}
 
 	oci_free_statement($get_events_stmt);
+ 
+ 	$js_tasks = json_encode($tasks);
+ 	$js_events = json_encode($events);
+ 
+ 	echo $js_tasks;
+ 	echo $js_events;
 }
 ?>
 </body>
