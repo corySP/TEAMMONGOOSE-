@@ -34,18 +34,9 @@ function create_user_calendar_page()
 	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	
 	oci_execute($get_tasks_stmt, OCI_DEFAULT);
-?>
-	<table>
-		<caption> Your Tasks: </caption>
-		<tr>
-			<th scope="col"> Project </th>
-			<th scope="col"> Task </th>
-			<th scope="col"> Date Due </th>
-			<th scope="col"> Status </th>
-			<th scope="col"> Description <th>
-			<th scope="col"> Comment <th>
-		</tr>
-<?php
+
+ 	$tasks = array();
+ 
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_project_name = oci_result($get_tasks_stmt, 'PROJECT_NAME');
@@ -69,20 +60,12 @@ function create_user_calendar_page()
 		{
 			$curr_user_comment = "none";
 		}
-?>
-		<tr>
-			<td> <?= $curr_project_name ?> </td>
-			<td> <?= $curr_task_name ?> </td>
-			<td> <?= $curr_task_date ?> </td>
-			<td> <?= $curr_current_status ?> </td>
-			<td> <?= $curr_task_description ?> </td>
-			<td> <?= $curr_user_comment ?> </td>
-		</tr>
-<?php
+		
+		$row = array($curr_task_date, $curr_project_name, $curr_task_name, $curr_current_status,
+			     $curr_task_description, $curr_user_comment);
+		array_push($tasks, $row);
 	}
-?>
-	</table>
-<?php
+
 	oci_free_statement($get_tasks_stmt);
 	
 	$get_events_str = 'select event_name, event_datetime
@@ -94,28 +77,18 @@ function create_user_calendar_page()
 	oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
 
 	oci_execute($get_events_stmt, OCI_DEFAULT);
-?>
-	<table>
-		<caption> Your Events: </caption>
-		<tr>
-			<th scope="col"> Event </th>
-			<th scope="col"> Date and Time </th>
-		</tr>
-<?php
+ 
+ 	$events = array();
+
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
 		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
-?>
-		<tr>
-			<td> <?= $curr_event_name ?> </td>
-			<td> <?= $curr_event_datetime ?> </td>
-		</tr>
-<?php
+		
+		$row = array($curr_event_datetime, $curr_event_name);
+		array_push($events, $row);
 	}
-?>
-	</table>
-<?php
+
 	oci_free_statement($get_events_stmt);
 }
 ?>
