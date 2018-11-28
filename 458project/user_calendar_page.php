@@ -90,9 +90,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 					  from   Task, Account
 					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
-
-$userstring = $_SESSION["current_user"];
-echo $userstring;	
+	
 //	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
 $current_user = 00000001;
 print_r($current_user);
@@ -103,7 +101,6 @@ print_r($current_user);
  
 	while (oci_fetch($get_tasks_stmt))
 	{
-echo "loop";
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 				
@@ -136,11 +133,9 @@ print_r($curr_task_name);
  	$js_tasks = json_encode($tasks);
  	$js_events = json_encode($events);
  
- 	echo $js_tasks;
+ 	print_r($js_tasks);
  	echo $js_events;
 
-   print_r($tasks);
-print_r($events);
 ?>
 
      <script src="calendar.js" type="text/javascript"></script>
