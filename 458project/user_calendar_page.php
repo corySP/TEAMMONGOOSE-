@@ -102,7 +102,7 @@ $current_user = 00000001;
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
-		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
+		$curr_task_date = (string)(oci_result($get_tasks_stmt, 'TASK_DATE'));
 				
 		$row = array($curr_task_date, $curr_task_name);
 
@@ -123,7 +123,7 @@ $current_user = 00000001;
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
-		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
+		$curr_event_datetime = (string)(oci_result($get_events_stmt, 'EVENT_DATETIME'));
 		$row = array($curr_event_datetime, $curr_event_name);
 		array_push($events, $row);
 	}
@@ -539,7 +539,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 
-var js_tasks = <?php echo $js_tasks; ?>;
+var js_tasks = JSON.parse(<?php echo $js_tasks; ?>);
 var js_events = JSON.parse('<?php echo $js_events; ?>');
 
 var tasks_and_events = [];
@@ -591,7 +591,7 @@ for (var i = 0; i < js_.length; i++)
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
     var month = date_conversion[1];
-    var day = date_conversion[2];
+    var day = (date_conversion[2].split(":"))[0];
     var converted_date = new Date(year, month, day);
 
     if (dates.includes(currdate))
