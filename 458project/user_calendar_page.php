@@ -550,9 +550,9 @@ for (var i = 0; i < js_tasks.length; i++)
     var currdate = js_tasks[i][0];
 
     var date_conversion = currdate.split("-");
-    var year = date_conversion[0];
-    var month = date_conversion[1];
-    var day = date_conversion[2];
+    var year = parseInt(date_conversion[0]);
+    var month = parseInt(date_conversion[1]);
+    var day = parseInt(date_conversion[2]);
     var converted_date = new Date(year, month, day);
 
 document.getElementById("test").innerHTML = converted_date; 
