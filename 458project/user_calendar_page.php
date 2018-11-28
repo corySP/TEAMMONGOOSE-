@@ -91,7 +91,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 
-$userstring = $_SESSION["current_user"])));
+$userstring = $_SESSION["current_user"];
 echo $userstring;	
 	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
 print_r($current_user);
