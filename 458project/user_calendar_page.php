@@ -538,6 +538,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 /****************************/
+document.getElementById("test").innerHTML = 5 + 6; 
 
 var js_tasks = JSON.parse(<?php echo $js_tasks; ?>);
 var js_events = JSON.parse('<?php echo $js_events; ?>');
@@ -587,7 +588,6 @@ for (var i = 0; i < js_tasks.length; i++)
 for (var i = 0; i < js_.length; i++)
 {
     var currdate = js_events[i][0];
-document.getElementById("test").innerHTML = currdate; 
 
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
