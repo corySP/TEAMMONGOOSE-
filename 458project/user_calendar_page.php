@@ -93,7 +93,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
 
 $userstring = $_SESSION["current_user"];
 echo $userstring;	
-	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+//	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+$current_user = 00000001;
 print_r($current_user);
 	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	
