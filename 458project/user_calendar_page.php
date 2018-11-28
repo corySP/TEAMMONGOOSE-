@@ -85,7 +85,7 @@ function create_user_calendar_page()
 	$conn = hsu_conn_sess($username, $password);
 	$get_tasks_str = 'select task_date, task_name
 					  from   Task, Account
-					  where  Task.user_id = :current_user;
+					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 	
 	$current_user = $_SESSION["current_user"];
