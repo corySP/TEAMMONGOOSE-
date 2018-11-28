@@ -542,8 +542,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 
-var js_tasks = JSON.parse('<?= echo $js_tasks; ?>');
-var js_events = JSON.parse('<?= echo $js_events; ?>');
+var js_tasks = JSON.parse('<?= $js_tasks; ?>');
+var js_events = JSON.parse('<?= $js_events; ?>');
 
 var tasks_and_events = [];
 var dates = [];
