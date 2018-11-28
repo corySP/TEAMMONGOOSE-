@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<h1>OUT</h1>
 <?php
 ini_set('display_errors', 'On');
 ini_set('html_errors', 0);
@@ -71,14 +72,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 function create_user_calendar_page()
 {
 ?>
-	<form method="post" action="<?= htmlentities($_SERVER['PHP_SELF'], ENT_QUOTES) ?>">
-		<fieldset>
-			<legend> User Calendar Page: </legend>
-            <input type="submit" name="user_log_out" value="Log Out" formnovalidate />
-            <input type="submit" name="user_to_home" value="Home" formnovalidate />
-            <input type="submit" name="user_to_files" value="Files" formnovalidate />
-		</fieldset>
-	</form>
+<h1>IN</h1>
 <?php
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
