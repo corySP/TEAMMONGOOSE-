@@ -132,5 +132,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
  	echo $js_tasks;
  	echo $js_events;
 ?>
+
+     <script src="calendar.js" type="text/javascript"></script>
+     
 </body>
 </html>
