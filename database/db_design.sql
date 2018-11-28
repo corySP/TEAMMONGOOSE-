@@ -26,7 +26,6 @@ primary key (event_id)
 drop table Usergroup cascade constraints;
 create table Usergroup
 (UGROUP_ID integer,
-permissions integer check(permissions in (0, 1)) not null,
 ugroup_name varchar(16),
 primary key (UGROUP_ID)
 );
@@ -71,6 +70,7 @@ drop table Users_in_group cascade constraints;
 create table Users_in_group
 (USER_ID integer,
 UGROUP_ID integer,
+permissions integer check(permissions in (0, 1)) not null,
 primary key (user_id, ugroup_id),
 foreign key (user_id) references Account,
 foreign key (ugroup_id) references Usergroup
