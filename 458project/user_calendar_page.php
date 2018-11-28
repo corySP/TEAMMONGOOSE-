@@ -86,7 +86,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
 	$conn = hsu_conn_sess($username, $password);
-	$get_tasks_str = 'select extract (day from task_date), extract (month from task_date), extract (year from task_date), task_name
+	$get_tasks_str = 'select extract (day from task_date) "day", extract (month from task_date) "month", extract (year from task_date) "year", task_name
 					  from   Task, Account
 					  where  Task.user_id = :current_user';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
@@ -102,9 +102,9 @@ $current_user = 00000001;
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
-		$curr_task_day = (string)(oci_result($get_tasks_stmt, 'EXTRACT_DAY_FROM_TASK_DATE'));
-		$curr_task_month = (string)(oci_result($get_tasks_stmt, 'EXTRACT_MONTH_FROM_TASK_DATE'));
-		$curr_task_year = (string)(oci_result($get_tasks_stmt, 'EXTRACT_YEAR_FROM_TASK_DATE'));
+		$curr_task_day = (string)(oci_result($get_tasks_stmt, 'DAY'));
+		$curr_task_month = (string)(oci_result($get_tasks_stmt, 'MONTH'));
+		$curr_task_year = (string)(oci_result($get_tasks_stmt, 'YEAR'));
 				
 		$row = array($curr_task_day, $curr_task_month, $curr_task_year, $curr_task_name);
 
@@ -112,7 +112,7 @@ $current_user = 00000001;
 	}
 	oci_free_statement($get_tasks_stmt);
 	
-	$get_events_str = 'select event_name, extract (day from event_datetime), extract (month from 1event_datetime), extract (year from event_datetime)
+	$get_events_str = 'select event_name, extract (day from event_datetime) "day", extract (month from event_datetime) "month", extract (year from event_datetime) "year"
 					   from   Event, Account, Event_users
 					   where  Event_users.user_id = :current_user
 							  and Event.event_id = Event_users.event_id';
@@ -126,9 +126,9 @@ $current_user = 00000001;
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
 
-		$curr_event_day = (string)(oci_result($get_tasks_stmt, 'EXTRACT_DAY_FROM_EVENT_DATETIME'));
-		$curr_event_month = (string)(oci_result($get_tasks_stmt, 'EXTRACT_MONTH_FROM_EVENT_DATETIME'));
-		$curr_event_year = (string)(oci_result($get_tasks_stmt, 'EXTRACT_YEAR_FROM_EVENT_DATETIME'));
+		$curr_event_day = (string)(oci_result($get_tasks_stmt, 'DAY'));
+		$curr_event_month = (string)(oci_result($get_tasks_stmt, 'MONTH'));
+		$curr_event_year = (string)(oci_result($get_tasks_stmt, 'YEAR'));
 
 		$row = array($curr_event_day, $curr_event_month, $curr_event_year, $curr_event_name);
 		array_push($events, $row);
@@ -591,9 +591,9 @@ document.getElementById("test").innerHTML = currdate;
 
 for (var i = 0; i < js_.length; i++)
 {
-    var day = js_events[i][0];
+    var day = (js_events[i][0]) - 10;
     var month = (js_events[i][1]) - 1;
-    var year = js_events[i][2];
+    var year = (js_events[i][2]) + 1119;
     currdate = new Date(year, month, day);
 
     if (dates.includes(currdate))
