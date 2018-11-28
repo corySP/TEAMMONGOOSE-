@@ -26,7 +26,6 @@ primary key (event_id)
 drop table Usergroup cascade constraints;
 create table Usergroup
 (UGROUP_ID integer,
-permissions integer check(permissions in (0, 1)) not null,
 ugroup_name varchar(16),
 primary key (UGROUP_ID)
 );
@@ -71,6 +70,7 @@ drop table Users_in_group cascade constraints;
 create table Users_in_group
 (USER_ID integer,
 UGROUP_ID integer,
+permissions integer check(permissions in (0, 1)) not null,
 primary key (user_id, ugroup_id),
 foreign key (user_id) references Account,
 foreign key (ugroup_id) references Usergroup
@@ -122,6 +122,41 @@ create or replace trigger ai_message_id
 begin
     select message_id_seq.nextval
     into :new.message_id
+    from dual;
+end;
+/
+show errors
+
+--Hangman_game(HANG_ID, word, current_progress, level)
+
+drop table Hangman cascade constraints;
+create table Hangman
+(HANG_ID integer not null,
+word varchar2(32) not null,
+current_progress varchar2(32) not null,
+hang_level integer not null,
+complete integer not null,
+primary key (hang_id)
+);
+
+drop sequence hang_id_seq;
+create sequence hang_id_seq;
+
+create or replace trigger ai_hang_id
+    before insert
+    on Hangman
+    for each row
+begin
+    select hang_id_seq.nextval
+    into :new.hang_id
+    from dual;
+
+    select 0
+    into :new.hang_level
+    from dual;
+
+    select 0
+    into :new.complete
     from dual;
 end;
 /

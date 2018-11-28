@@ -40,23 +40,21 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 </head>
 
 <body>
-    <h1> Team Project Manager, CS 458 </h1>
+   <!-- <h1> Team Project Manager, CS 458 </h1> -->
 
     <?php
     //When you are starting Brings up HSU master login
-    if ((! array_key_exists('next-stage', $_SESSION)))
+    if ( (! array_key_exists('next-stage', $_SESSION)) ||
+         (($_SESSION['next-stage'] == "user_loginged_in") &&
+	  (array_key_exists('user_log_out', $_POST))))
        {
            //Creates Loogin form
-<<<<<<< HEAD
-           create_hsu_login();
-	   $_SESSION['next-stage'] = "user_login";
-=======
            create_login();
 	   $_SESSION['next-stage'] = "login_options";
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
        }
-    //When you are going to the user login from the hsu login
-    //Or when you are login out from any of the user pages
+  /*
+  //When you are returning to user_login from either the
+    // user registration or from the user_home_page
     elseif (($_SESSION['next-stage'] == "user_login")||
             (($_SESSION['next-stage'] == "user_logged_in") &&
     	   (array_key_exists('user_log_out', $_POST))))
@@ -65,7 +63,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 	   create_login();
        	   $_SESSION['next-stage'] = "login_options";
        }
-      
+    */  
     //when you are going to register from user_login
     elseif (($_SESSION['next-stage'] == "login_options") &&
            (array_key_exists('register-button', $_POST)))
@@ -124,22 +122,6 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 	   create_user_file_page();
 	   $_SESSION['next-stage'] = "user_logged_in";
        }
-
-
-<<<<<<< HEAD
-    //when you are going to the main page from user_login
-    elseif ( ($_SESSION['next-stage'] == "login_options") &&
-             (array_key_exists('login-exit-button', $_POST)) )
-       {
-           create_hsu_login();	   
-	   session_destroy();
-	   session_regenerate_id(TRUE);
-	   session_start();
-       }
-    
-
-=======
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
     else
     {
       ?>
@@ -151,16 +133,13 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
         session_regenerate_id(TRUE);
         session_start();
 
-<<<<<<< HEAD
-         create_hsu_login();
-=======
          create_login();
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
-        
+
+        $_SESSION['next-stage'] = "login_options";
     }
 
      
-    require_once("328footer.html");
+   // require_once("328footer.html");
     ?>
 
 </body>

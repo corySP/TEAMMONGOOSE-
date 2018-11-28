@@ -1,4 +1,3 @@
-
 <?php
 /*======
    function: create_user_calendar_page: void -> void
@@ -19,22 +18,12 @@ function create_user_calendar_page()
 		</fieldset>
 	</form>
 <?php
-<<<<<<< HEAD
-	$username = strip_tags(htmlspecialchars($_SESSION['username']));
-	$password = strip_tags(htmlspecialchars($_SESSION['password']));
-=======
 	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
 	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 	$conn = hsu_conn_sess($username, $password);
-
 	$get_tasks_str = 'select project_name, task_name, task_date, current_status, 
 							 task_description, user_comment
-<<<<<<< HEAD
-					  from   Project, Task, User
-=======
 					  from   Project, Task, Account
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 					  where  Task.user_id = :current_user
 							 and Project.project_id = Task.project_id';
 	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
@@ -43,32 +32,15 @@ function create_user_calendar_page()
 	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	
 	oci_execute($get_tasks_stmt, OCI_DEFAULT);
-?>
-	<table>
-		<caption> Your Tasks: </caption>
-		<tr>
-			<th scope="col"> Project </th>
-			<th scope="col"> Task </th>
-			<th scope="col"> Date Due </th>
-			<th scope="col"> Status </th>
-			<th scope="col"> Description <th>
-			<th scope="col"> Comment <th>
-		</tr>
-<?php
+ 	$tasks = array();
+ 
 	while (oci_fetch($get_tasks_stmt))
 	{
 		$curr_project_name = oci_result($get_tasks_stmt, 'PROJECT_NAME');
-<<<<<<< HEAD
-		$curr_task_name = oci_result($get_tasks-stmt, 'TASK_NAME');
-		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
-		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
-		$curr_task_description = oci_result($get_tasks-stmt, 'TASK_DESCRIPTION');
-=======
 		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
 		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
 		$curr_current_status = oci_result($get_tasks_stmt, 'CURRENT_STATUS');
 		$curr_task_description = oci_result($get_tasks_stmt, 'TASK_DESCRIPTION');
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 		$curr_user_comment = oci_result($get_tasks_stmt, 'USER_COMMENT');
 		
 		if ($curr_current_status === NULL)
@@ -85,62 +57,37 @@ function create_user_calendar_page()
 		{
 			$curr_user_comment = "none";
 		}
-?>
-		<tr>
-			<td> <?= $curr_project_name ?> </td>
-			<td> <?= $curr_task_name ?> </td>
-			<td> <?= $curr_task_date ?> </td>
-			<td> <?= $curr_current_status ?> </td>
-			<td> <?= $curr_task_description ?> </td>
-			<td> <?= $curr_user_comment ?> </td>
-		</tr>
-<?php
+		
+		$row = array($curr_task_date, $curr_project_name, $curr_task_name, $curr_current_status,
+			     $curr_task_description, $curr_user_comment);
+		array_push($tasks, $row);
 	}
-?>
-	</table>
-<?php
 	oci_free_statement($get_tasks_stmt);
 	
 	$get_events_str = 'select event_name, event_datetime
-<<<<<<< HEAD
-					   from   Event, User, Event_users
-=======
 					   from   Event, Account, Event_users
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
 					   where  Event_users.user_id = :current_user
 							  and Event.event_id = Event_users.event_id';
 	$get_events_stmt = oci_parse($conn, $get_events_str);
 	
 	oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
-
 	oci_execute($get_events_stmt, OCI_DEFAULT);
-?>
-	<table>
-		<caption> Your Events: </caption>
-		<tr>
-			<th scope="col"> Event </th>
-			<th scope="col"> Date and Time </th>
-		</tr>
-<?php
+ 
+ 	$events = array();
 	while (oci_fetch($get_events_stmt))
 	{
 		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
-<<<<<<< HEAD
-		$curr_event_datetime = oci_resutl($get_events_stmt, 'EVENT_DATETIME');
-=======
 		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
->>>>>>> 06057d091fa62a7d411066d7ec4fba8194e39174
-?>
-		<tr>
-			<td> <?= $curr_event_name ?> </td>
-			<td> <?= $curr_event_datetime ?> </td>
-		</tr>
-<?php
+		$row = array($curr_event_datetime, $curr_event_name);
+		array_push($events, $row);
 	}
-?>
-	</table>
-<?php
 	oci_free_statement($get_events_stmt);
+ 
+ 	$js_tasks = json_encode($tasks);
+ 	$js_events = json_encode($events);
+ 
+ 	echo $js_tasks;
+ 	echo $js_events;
 }
 ?>
 </body>

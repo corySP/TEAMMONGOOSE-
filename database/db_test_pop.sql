@@ -17,7 +17,7 @@ values
 
 insert into Usergroup
 values
-(00000000, 1, 'Mongooses');
+(00000000, 'Mongooses');
 
 insert into Project
 values
@@ -29,7 +29,7 @@ values
 
 insert into Users_in_group
 values
-(00000001, 00000000);
+(00000001, 00000000,1);
 
 insert into Tasks_in_project
 values
