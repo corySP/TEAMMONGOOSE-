@@ -41,7 +41,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     require_once("destroy_and_exit.php");
     ?>
 
-   
+    <script src="calendar.js" type="text/javascript"> </script>   
 </head>
 
 <body>

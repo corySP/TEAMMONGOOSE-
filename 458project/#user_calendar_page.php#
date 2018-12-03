@@ -70,7 +70,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1> Your Calendar </h1>
+<h1 id="test"></h1>
 <?php
 $username = DB_USER;
 $password = DB_PASS;
@@ -80,8 +80,8 @@ $get_tasks_str = 'select task_date, task_name
                   where  Task.user_id = :current_user';
 $get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 									  
-      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
-//$current_user = 00000001;
+//      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+$current_user = 00000001;
 oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	      
 oci_execute($get_tasks_stmt, OCI_DEFAULT);
@@ -602,10 +602,9 @@ var month;
     var converted_date = new Date(year, month, day);
     if (dates.includes(currdate))
         {
-	    var length = tasks_and_events.length;
-            for (var j = 0; j < length; j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                    if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+                    if (tasks_and_events[j].date == converted_date)
                         {
                             tasks_and_events[j].events.push({
                                  name: js_tasks[i][1],
@@ -692,12 +691,11 @@ var month;
 
     if (dates.includes(currdate))
         {
-          var length = tasks_and_events.length;
-            for (var j = 0; j < length; j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+                    if (tasks_and_events[j].date == converted_date)
                         {
-				
+
 			  tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',
