@@ -531,153 +531,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   ("");
 })();
 
-var app = angular.module("myApp", []);
-app.controller("AppCtrl", function($scope) {
-  //alert("pepe")
-});
-app.directive("calendar", [
-  function() {
-    return {
-      restrict: "EA",
-      scope: {
-        date: "=",
-        events: "="
-      },
-      link: function(scope, element, attributes) {
-        var data = [
-          {
-            date: new Date(2017, 0, 1),
-            events: [
-              {
-                name: "smokeloader",
-                type: "bot",
-                color: "orange"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 2),
-            events: [
-              {
-                name: "zeus",
-                type: "bot",
-                color: "blue"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 3),
-            events: [
-              {
-                name: "ponyloader",
-                type: "bot",
-                color: "yellow"
-              },
-              {
-                name: "aldibot",
-                type: "bot",
-                color: "yellow"
-              },
-              {
-                name: "dirtjumper",
-                type: "malware",
-                color: "yellow"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 4),
-            events: [
-              {
-                name: "andromeda",
-                type: "bot",
-                color: "green"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 5),
-            events: [
-              {
-                name: "conficker",
-                type: "bot",
-                color: "orange"
-              },
-              {
-                name: "umbraloader",
-                type: "bot",
-                color: "orange"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 17),
-            events: [
-              {
-                name: "aldibot",
-                type: "bot",
-                color: "pink"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 2),
-            events: [
-              {
-                name: "zeus",
-                type: "bot",
-                color: "blue"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 18),
-            events: [
-              {
-                name: "ponyloader",
-                type: "bot",
-                color: "yellow"
-              },
-              {
-                name: "aldibot",
-                type: "bot",
-                color: "yellow"
-              },
-              {
-                name: "dirtjumper",
-                type: "malware",
-                color: "yellow"
-              }
-            ]
-          },
-          ,
-          {
-            date: new Date(2017, 0, 19),
-            events: [
-              {
-                name: "zeus",
-                type: "bot",
-                color: "blue"
-              }
-            ]
-          },
-          {
-            date: new Date(2017, 0, 19),
-            events: [
-              {
-                name: "ponyloader",
-                type: "bot",
-                color: "yellow"
-              }
-            ]
-          }
-        ];
-        var calendar = new Calendar("#calendar", data);
-      }
-    };
-  }
-]);
-
 /****************************/
 /****************************/
 /****************************/
@@ -785,10 +638,6 @@ for (var i = 0; i < js_.length; i++)
     var mon = date_conversion[1];
     var day = parseInt(date_conversion[2]);
 
-        else if (mon == "MAR")
-    {
-        month = 2;
-    }
 var month;
     if (mon == "JAN")
     {
@@ -872,7 +721,7 @@ var month;
 var test = tasks_and_events.toString();
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
-  alert("pepe")
+ // alert("pepe")
 });
 app.directive('calendar', [function(){
   $window.alert("app");
