@@ -539,7 +539,7 @@ var js_tasks = JSON.parse('<?php echo $js_tasks; ?>');
 var js_events = JSON.parse('<?php echo $js_events; ?>');
 var tasks_and_events = [];
 var dates = [];
-document.getElementById("test").innerHTML = js_tasks[0][1]; 
+document.getElementById("test").innerHTML = js_tasks[0][0]; 
 
 for (var i = 0; i < js_tasks.length; i++)
 {
