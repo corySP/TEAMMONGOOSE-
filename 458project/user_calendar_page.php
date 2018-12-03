@@ -73,8 +73,8 @@ $old_error_handler = set_error_handler("ErrorHandler");
 ?>
 <h1 id="test"></h1>
 <?php
-$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
-$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
+$username = DB_USER;
+$password = DB_PASS;
 $conn = hsu_conn_sess($username, $password);
 $get_tasks_str = 'select task_date, task_name
 	       	  from   Task, Account
