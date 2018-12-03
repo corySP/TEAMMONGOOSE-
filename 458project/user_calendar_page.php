@@ -689,7 +689,7 @@ var month;
 
     var converted_date = new Date(year, month, day);
 				
-document.getElementById("test").innerHTML = tasks_and_events[0].date; 
+document.getElementById("test").innerHTML = converted_date; 
 
     if (dates.includes(currdate))
         {
