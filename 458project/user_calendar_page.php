@@ -633,7 +633,7 @@ for (var i = 0; i < js_events.length; i++)
 {
     var currdate = js_events[i][0];
     var date_conversion = currdate.split("-");
-    var year = parseInt(date_conversion[2]);
+    var year = 2000 + parseInt(date_conversion[2]);
     var mon = date_conversion[1];
     var day = parseInt(date_conversion[0]);
 
