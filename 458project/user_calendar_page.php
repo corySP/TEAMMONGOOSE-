@@ -545,9 +545,9 @@ for (var i = 0; i < js_tasks.length; i++)
 {
     var currdate = js_tasks[i][0];
     var date_conversion = currdate.split("-");
-    var year = 2000 + parseInt(date_conversion[0]);
+    var year = 2000 + parseInt(date_conversion[2]);
     var mon = date_conversion[1];
-    var day = parseInt(date_conversion[2]);
+    var day = parseInt(date_conversion[1]);
 
 var month;
     if (mon == "JAN")
