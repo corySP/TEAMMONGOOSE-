@@ -602,7 +602,8 @@ var month;
     var converted_date = new Date(year, month, day);
     if (dates.includes(currdate))
         {
-            for (var j = 0; j < tasks_and_events.length; j++)
+	    var length = tasks_and_events.length;
+            for (var j = 0; j < length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
@@ -692,8 +693,8 @@ var month;
     if (dates.includes(currdate))
         {
 document.getElementById("test").innerHTML = "includes"; 
-
-            for (var j = 0; j < tasks_and_events.length; j++)
+            var length = tasks_and_events.length;
+            for (var j = 0; j < length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
