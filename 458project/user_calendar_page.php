@@ -720,7 +720,7 @@ var month;
 }
 var test = tasks_and_events.toString();
 var app = angular.module('myApp', []);
-app.controller('AppCtrl', function($scope, $location.path())){
+app.controller('AppCtrl', function($scope, $location)){
  // alert("pepe")
 // $window.location = 'http://nrs-projects.humboldt.edu/~mfh128/458project/user_calendar_page.php'
 });
