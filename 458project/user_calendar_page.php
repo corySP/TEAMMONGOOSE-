@@ -473,6 +473,8 @@ var js_tasks = JSON.parse('<?php echo $js_tasks; ?>');
 var js_events = JSON.parse('<?php echo $js_events; ?>');
 var tasks_and_events = [];
 var dates = [];
+document.getElementById("test").innerHTML = js_tasks; 
+
 for (var i = 0; i < js_tasks.length; i++)
 {
     var currdate = js_tasks[i][0];
@@ -533,7 +535,6 @@ var month;
  
 
     var converted_date = new Date(year, month, day);
-document.getElementById("test").innerHTML = js_tasks; 
     if (dates.includes(currdate))
         {
             for (var j = 0; j < tasks_and_events.length; j++)
