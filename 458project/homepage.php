@@ -23,17 +23,25 @@
     </script>
 
     <div id="titlebar" class="titlebar">
-        <a href="JavaScript:popup('./user_calendar_page.php')">WEASELCHAT</a>
-        
+        <!--<a href="JavaScript:popup('./user_calendar_page.php')">WEASELCHAT</a>-->
+        <a href="javascript:void(0)"><b>WEASEL PROJECT MANAGEMENT</b></a>
+        <button id="slidePaneBtn">Nav</button>
     </div>  
-    <hr />
+    <!-- <hr /> -->
 
+<!--
     <p> <?php echo $_SESSION['current_user']; ?> </p>
+-->
 
-    <div class="groupbar">
+    <div id="groupbar">
+<!--
         <button id="tasks">Tasks</button>
         <br />
         <button id="calendar">Calendar</button>
+-->
+        <a href="javascript:void(0)" id="tasks">PROJECT</a>
+<hr />
+        <a href="javascript:void(0)" id="calendar">CALENDAR</a>
 <!--
         <a href="homepage.php#group2">Group 2</a>
         <a href="homepage.php#group3">Group 3</a>
@@ -41,10 +49,17 @@
     </div>
      <div id="contents"></div>
 
+<!--
     <div class="memberbar">
+-->
+
     </div>
-    <div class="chatbar">
+    <div id="chatbar" class="chatbar">
         <?php require_once('chatbox.php');?>
+    </div>
+
+    <div id="footer">
+        <button id="slideChatBtn">Chat</button>
     </div>
 <!--
 </body>
