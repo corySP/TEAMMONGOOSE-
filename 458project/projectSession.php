@@ -20,8 +20,13 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 -->
 
 <head>
-    <title> Team Project Manager </title>
-    <meta charset="utf-8" />
+    <title> WEASELCHAT </title>
+        <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="homepage.css">
+    <script type="text/javascript" src="jquery-3.3.1.min.js" defer="defer"></script>
+    <script type="text/javascript" src="task.js" defer="defer"></script>
+    <script src="chat.js" type="text/javascript" defer="defer"></script>
+    <script src="buCal.js" type="text/javascript" defer="defer"></script>
 
     <?php
     require_once("create_hsu_login.php");
