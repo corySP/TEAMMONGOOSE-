@@ -688,6 +688,8 @@ var month;
     }
 
     var converted_date = new Date(year, month, day);
+				
+document.getElementById("test").innerHTML = tasks_and_events[0].date; 
 
     if (dates.includes(currdate))
         {
@@ -695,10 +697,7 @@ var month;
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
-				
-document.getElementById("test").innerHTML = "found"; 
-
-                   tasks_and_events[j].events.push({
+			  tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',
                                  color: 'pink',
