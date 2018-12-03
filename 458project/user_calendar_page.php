@@ -539,7 +539,6 @@ var js_tasks = JSON.parse('<?php echo $js_tasks; ?>');
 var js_events = JSON.parse('<?php echo $js_events; ?>');
 var tasks_and_events = [];
 var dates = [];
-document.getElementById("test").innerHTML = js_tasks[0][0]; 
 
 for (var i = 0; i < js_tasks.length; i++)
 {
@@ -629,6 +628,8 @@ var month;
 	        dates.push(currdate);
             }
 }
+document.getElementById("test").innerHTML = tasks_and_events[0].date; 
+
 for (var i = 0; i < js_events.length; i++)
 {
     var currdate = js_events[i][0];
