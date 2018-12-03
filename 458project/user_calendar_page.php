@@ -628,7 +628,7 @@ var month;
 	        dates.push(currdate);
             }
 }
-document.getElementById("test").innerHTML = tasks_and_events[0].date; 
+document.getElementById("test").innerHTML = js_events[0][0]; 
 
 for (var i = 0; i < js_events.length; i++)
 {
@@ -636,7 +636,7 @@ for (var i = 0; i < js_events.length; i++)
     var date_conversion = currdate.split("-");
     var year = parseInt(date_conversion[2]);
     var mon = date_conversion[1];
-    var day = parseInt((date_conversion[0].split(":")[0]));
+    var day = parseInt(date_conversion[0]);
 
 var month;
     if (mon == "JAN")
