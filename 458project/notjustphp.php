@@ -1,11 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp" ng-controller="AppCtrl">
+
+<head>
+     <title> Your Calendar </title>
+     <meta charset="utf-8" />
+
+     <link href="homepage.css" type="text/css" rel="stylesheet" />
+     <link href="calendar.css" type="text/css" rel="stylesheet" />
+
+     <?php
+	 require_once("hsu_conn_sess.php");
+     ?>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+     <script src="calendar.js" type="text/javascript"></script>
+     
+</head>
+
+<body>
+<div calendar class="calendar" id="calendar"></div>
+<?php
+session_start();
+
+
+ini_set('display_errors', 'On');
+ini_set('html_errors', 0);
+
+error_reporting(-1);
+
+function ShutdownHandler()
+{
+   if(@is_array($error = @error_get_lsat()))
+   {
+       return(@call_user_func_array9('ErrorHandler', $error));
+   };
+
+   return(TRUE);
+};
+
+register_shutdown_function('ShutdownHandler');
+
+function ErrorHandler($type, $message, $file, $line)
+{
+   $_ERRORS = Array(
+        0x0001 => 'E_ERROR',
+        0x0002 => 'E_WARNING',
+        0x0004 => 'E_PARSE',
+        0x0008 => 'E_NOTICE',
+        0x0010 => 'E_CORE_ERROR',
+        0x0020 => 'E_CORE_WARNING',
+        0x0040 => 'E_COMPILE_ERROR',
+        0x0080 => 'E_COMPILE_WARNING',
+        0x0100 => 'E_USER_ERROR',
+        0x0200 => 'E_USER_WARNING',
+        0x0400 => 'E_USER_NOTICE',
+        0x0800 => 'E_STRICT',
+        0x1000 => 'E_RECOVERABLE_ERROR',
+        0x2000 => 'E_DEPRECATED',
+        0x4000 => 'E_USER_DEPRECATED'
+    );
+
+    if(!@is_string($name = @array_search($type, @array_flip($_ERRORS))))
+    {
+        $name = 'E_UNKNOWN';
+    };
+
+    return(print(@sprintf("%s Error in file \xBB%s\xAB at line %d: %s\n", $name, @basename($file), $line, $message)));
+};
+
+$old_error_handler = set_error_handler("ErrorHandler");
+
+
+/*======
+   function: create_user_calendar_page: void -> void
+   purpose: expect nothing, and returns nothing, BUT does
+            expect the $_SESSION array to contain a key "username"
+            with a valid Oracle username, and a key "password"
+            with a valid Oracle password;
+=====*/
+?>
+<h1>IN</h1>
+<?php
+	$username = strip_tags(htmlspecialchars($_SESSION['master_username']));
+	$password = strip_tags(htmlspecialchars($_SESSION['master_password']));
+	$conn = hsu_conn_sess($username, $password);
+	$get_tasks_str = 'select task_date, task_name
+					  from   Task, Account
+					  where  Task.user_id = :current_user';
+	$get_tasks_stmt = oci_parse($conn, $get_tasks_str);
+	
+//	$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+$current_user = 00000001;
+
+	oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
+	
+	oci_execute($get_tasks_stmt, OCI_DEFAULT);
+ 	$tasks = array();
+ 
+	while (oci_fetch($get_tasks_stmt))
+	{
+		$curr_task_name = oci_result($get_tasks_stmt, 'TASK_NAME');
+		$curr_task_date = oci_result($get_tasks_stmt, 'TASK_DATE');
+				
+		$row = array($curr_task_date, $curr_task_name);
+
+		array_push($tasks, $row);
+	}
+	oci_free_statement($get_tasks_stmt);
+	
+	$get_events_str = 'select event_name, event_datetime
+					   from   Event, Account, Event_users
+					   where  Event_users.user_id = :current_user
+							  and Event.event_id = Event_users.event_id';
+	$get_events_stmt = oci_parse($conn, $get_events_str);
+	
+	oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
+	oci_execute($get_events_stmt, OCI_DEFAULT);
+ 
+ 	$events = array();
+	while (oci_fetch($get_events_stmt))
+	{
+		$curr_event_name = oci_result($get_events_stmt, 'EVENT_NAME');
+		$curr_event_datetime = oci_result($get_events_stmt, 'EVENT_DATETIME');
+		$row = array($curr_event_datetime, $curr_event_name);
+		array_push($events, $row);
+	}
+	oci_free_statement($get_events_stmt);
+ 
+ 	$js_tasks = json_encode($tasks);
+ 	$js_events = json_encode($events);
+ 
+ 	print_r($js_tasks);
+ 	echo $js_events;
+
+?>
+
+     <script src="calendar.js" type="text/javascript"></script>
+     <div calendar class="calendar" id="calendar"></div>
+</body>
+</html>
+
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script>
 /*
 Copyright (c) 2018 by Benjamin (https://codepen.io/maggiben/pen/OPmLBW)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associacumentation files (the "Software"), to deal in the Software without restriction, including without limitahe rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Softwar to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portf the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION TRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEAIN THE SOFTWARE.
 */
 
 ! function() {
@@ -402,86 +551,87 @@ var dates = [];
 for (var i = 0; i < js_tasks.length; i++)
 {
     var currdate = js_tasks[i][0];
-    
+
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
     var month = date_conversion[1];
     var day = date_conversion[2];
     var converted_date = new Date(year, month, day);
-    
+
     if (dates.includes(currdate))
-	{
-	    for (var j = 0; j < tasks_and_events.length, j++)
-		{
-		    if (tasks_and_events[j].date == converted_date)
-			{
-			    tasks_and_events[j].events.push({
-				 name: js_tasks[i][1],
-				 type: 'task',
-				 color: 'green',
-				})
-			    }
-		    }
-	    }
+        {
+            for (var j = 0; j < tasks_and_events.length; j++)
+                {
+                    if (tasks_and_events[j].date == converted_date)
+                        {
+                            tasks_and_events[j].events.push({
+                                 name: js_tasks[i][1],
+                                 type: 'task',
+                                 color: 'green',
+                                })
+                            }
+                    }
+            }
     else
-	{
-	    var task = {
-		date: converted_date,
-		events: [{
-		    name: js_tasks[i][1],
-		    type: 'task',
-		    color: 'green',
-		    }]
-		}
-	    
-	    tasks_and_events.push(task);
-	    }
+        {
+            var task = {
+                date: converted_date,
+                events: [{
+                    name: js_tasks[i][1],
+                    type: 'task',
+                    color: 'green',
+                    }]
+                }
+
+            tasks_and_events.push(task);
+            }
 }
 
 for (var i = 0; i < js_.length; i++)
 {
     var currdate = js_events[i][0];
-    
+
     var date_conversion = currdate.split("-");
     var year = date_conversion[0];
     var month = date_conversion[1];
     var day = date_conversion[2];
     var converted_date = new Date(year, month, day);
-    
+
     if (dates.includes(currdate))
-	{
-	    for (var j = 0; j < tasks_and_events.length, j++)
-		{
-		    if (tasks_and_events[j].date == converted_date)
-			{
-			    tasks_and_events[j].events.push({
-				 name: js_events[i][1],
-				 type: 'event',
-				 color: 'pink',
-				})
-			    }
-		    }
-	    }
+        {
+            for (var j = 0; j < tasks_and_events.length; j++)
+                {
+                    if (tasks_and_events[j].date == converted_date)
+                        {
+                            tasks_and_events[j].events.push({
+                                 name: js_events[i][1],
+                                 type: 'event',
+                                 color: 'pink',
+                                })
+                            }
+                    }
+            }
     else
-	{
-	    var vevent = {
-		date: converted_date,
-		events: [{
-		    name: js_events[i][1],
-		    type: 'event',
-		    color: 'pink',
-		    }]
-		}
-	    
-	    tasks_and_events.push(vevent);
-	    }
+        {
+            var vevent = {
+                date: converted_date,
+                events: [{
+                    name: js_events[i][1],
+                    type: 'event',
+                    color: 'pink',
+                    }]
+                }
+
+            tasks_and_events.push(vevent);
+            }
 }
 
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
-  //alert("pepe")
+  alert("pepe")
 });
 app.directive('calendar', [function(){
+  $window.alert("app");
   return {
     restrict: 'EA',
     scope: {
@@ -489,7 +639,11 @@ app.directive('calendar', [function(){
       events: '='
     },
     link: function(scope, element, attributes) {
-      var calendar = new Calendar('#calendar', tasks_and_events);
+      var data = tasks_and_events;
+      var calendar = new Calendar('#calendar', data);
     }
-  }
+  };
 }]);
+</script>
+</body>
+</html>
