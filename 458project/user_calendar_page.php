@@ -630,7 +630,7 @@ var month;
 	        dates.push(currdate);
             }
 }
-for (var i = 0; i < js_.length; i++)
+for (var i = 0; i < js_events.length; i++)
 {
     var currdate = js_events[i][0];
     var date_conversion = currdate.split("-");
