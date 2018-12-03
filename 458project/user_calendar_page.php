@@ -628,7 +628,7 @@ var month;
 	        dates.push(currdate);
             }
 }
-document.getElementById("test").innerHTML = js_events[0][0]; 
+document.getElementById("test").innerHTML = dates[0]; 
 
 for (var i = 0; i < js_events.length; i++)
 {
