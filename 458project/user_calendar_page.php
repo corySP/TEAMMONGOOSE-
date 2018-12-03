@@ -605,7 +605,7 @@ var month;
 	    var length = tasks_and_events.length;
             for (var j = 0; j < length; j++)
                 {
-                    if (tasks_and_events[j].date == converted_date)
+                    if (tasks_and_events[j].date.getTime() == converted_date.getTime())
                         {
                             tasks_and_events[j].events.push({
                                  name: js_tasks[i][1],
@@ -692,11 +692,13 @@ var month;
 
     if (dates.includes(currdate))
         {
-document.getElementById("test").innerHTML = tasks_and_events[0].date + converted_date; 
-            var length = tasks_and_events.length;
+          var length = tasks_and_events.length;
             for (var j = 0; j < length; j++)
                 {
-                    if (tasks_and_events[j].date == converted_date)
+
+document.getElementById("test").innerHTML = "in"; 
+          
+                if (tasks_and_events[j].date.getTime() == converted_date.getTime())
                         {
 				
 			  tasks_and_events[j].events.push({
