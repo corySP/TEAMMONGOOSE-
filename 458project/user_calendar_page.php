@@ -16,7 +16,7 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-     <script src="calendar.js" type="text/javascript"></script>
+<!--     <script src="calendar.js" type="text/javascript"></script> -->
      
 </head>
 
@@ -124,7 +124,7 @@ $js_tasks = json_encode($tasks);
 $js_events = json_encode($events);
 ?>
 
-     <script src="calendar.js" type="text/javascript"></script>
+    <!-- <script src="calendar.js" type="text/javascript"></script> -->
      <div calendar class="calendar" id="calendar"></div>
 </body>
 </html>
