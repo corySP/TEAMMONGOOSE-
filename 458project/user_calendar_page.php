@@ -21,7 +21,6 @@
 </head>
 
 <body>
-<div calendar class="calendar" id="calendar"></div>
 <?php
 session_start();
 
