@@ -628,7 +628,6 @@ var month;
 	        dates.push(currdate);
             }
 }
-document.getElementById("test").innerHTML = dates[0]; 
 
 for (var i = 0; i < js_events.length; i++)
 {
@@ -692,6 +691,9 @@ var month;
 
     if (dates.includes(currdate))
         {
+
+document.getElementById("test").innerHTML = "includes"; 
+
             for (var j = 0; j < tasks_and_events.length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
