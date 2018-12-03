@@ -70,7 +70,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1 id="test"></h1>
+<h1> Your Calendar </h1>
 <?php
 $username = DB_USER;
 $password = DB_PASS;
@@ -695,9 +695,6 @@ var month;
           var length = tasks_and_events.length;
             for (var j = 0; j < length; j++)
                 {
-
-document.getElementById("test").innerHTML = "in"; 
-          
                 if (tasks_and_events[j].date.getTime() == converted_date.getTime())
                         {
 				
