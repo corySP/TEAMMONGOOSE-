@@ -688,8 +688,6 @@ var month;
     }
 
     var converted_date = new Date(year, month, day);
-				
-document.getElementById("test").innerHTML = converted_date; 
 
     if (dates.includes(currdate))
         {
@@ -697,6 +695,9 @@ document.getElementById("test").innerHTML = converted_date;
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
+				
+document.getElementById("test").innerHTML = "found"; 
+
 			  tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',

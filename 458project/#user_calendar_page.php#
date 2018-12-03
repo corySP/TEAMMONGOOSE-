@@ -633,7 +633,7 @@ for (var i = 0; i < js_events.length; i++)
 {
     var currdate = js_events[i][0];
     var date_conversion = currdate.split("-");
-    var year = parseInt(date_conversion[2]);
+    var year = 2000 + parseInt(date_conversion[2]);
     var mon = date_conversion[1];
     var day = parseInt(date_conversion[0]);
 
@@ -693,12 +693,10 @@ var month;
         {
             for (var j = 0; j < tasks_and_events.length; j++)
                 {
-
                     if (tasks_and_events[j].date == converted_date)
                         {
-				 
 
-                   tasks_and_events[j].events.push({
+			  tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',
                                  color: 'pink',
