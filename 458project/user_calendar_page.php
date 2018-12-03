@@ -80,8 +80,8 @@ $get_tasks_str = 'select task_date, task_name
                   where  Task.user_id = :current_user';
 $get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 									  
-//      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
-$current_user = 00000001;
+      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+//$current_user = 00000001;
 oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	      
 oci_execute($get_tasks_stmt, OCI_DEFAULT);
