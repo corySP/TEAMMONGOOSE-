@@ -75,7 +75,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
 <?php
 $username = DB_USER;
 $password = DB_PASS;
-$conn = hsu_conn_sess($username, $password);
+$conn = hsu_conn_sess(DB_USER, DB_PASS);
 $get_tasks_str = 'select task_date, task_name
 	       	  from   Task
                   where  Task.user_id = :current_user';
