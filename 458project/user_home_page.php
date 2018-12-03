@@ -145,9 +145,9 @@ function create_user_home_page()
           </fieldset>
         </form>
        =======*/
+    require_once('homepage.php');
        ?>
     <?php
     }
-    require_once('homepage.php');
 }
 ?>
