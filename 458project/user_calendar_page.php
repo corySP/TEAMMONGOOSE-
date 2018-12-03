@@ -691,14 +691,14 @@ var month;
 
     if (dates.includes(currdate))
         {
-
-document.getElementById("test").innerHTML = "includes"; 
-
             for (var j = 0; j < tasks_and_events.length; j++)
                 {
                     if (tasks_and_events[j].date == converted_date)
                         {
-                            tasks_and_events[j].events.push({
+				
+document.getElementById("test").innerHTML = "found"; 
+
+                   tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',
                                  color: 'pink',
