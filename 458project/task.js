@@ -12,6 +12,8 @@ $(document).ready( function() {
         getTasks();
     });
 
+    getTasks();
+
 });
 
 function getTasks() {

@@ -24,9 +24,11 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
         <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="homepage.css">
     <script type="text/javascript" src="jquery-3.3.1.min.js" defer="defer"></script>
+    <script type="text/javascript" src="https:code.jquery.com/ui/1.12.1/jquery-ui.js" defer="defer"></script>
     <script type="text/javascript" src="task.js" defer="defer"></script>
     <script src="chat.js" type="text/javascript" defer="defer"></script>
     <script src="buCal.js" type="text/javascript" defer="defer"></script>
+    <script src="slides.js" type="text/javascript" defer="defer"></script>
 
     <?php
     require_once("create_hsu_login.php");
@@ -102,7 +104,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     	   (array_key_exists('login-submit-button', $_POST))) ||
 	   (($_SESSION['next-stage'] == "user_logged_in") &&
 	   (array_key_exists('user_to_home', $_POST))))
-	   
+       //))
        {
            ///Generates user home page
 	   create_user_home_page();
