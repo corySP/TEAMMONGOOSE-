@@ -28,7 +28,7 @@ function create_login()
 	 (!array_key_exists("register-back", $_POST))) )
      {   
    	   
-    $_SESSION["current_user"] = "none";  
+    $_SESSION["current_user"] = -1;  
 
     require_once("../../_conn.php");  
     $_SESSION["master_username"] = DB_USER;
@@ -43,22 +43,28 @@ function create_login()
 	 <fieldset>
          <legend> Enter your username/password:
          </legend>
+            <br />
 
       <label class="heading" for="name_entry"> Username: </label>
       <input type="text" name="username" id="name_entry"
              required="required" />
+            <br />
+            <br />
 
       <label class="heading" for="pwd_entry"> Password: </label>
       <input type="password" name="password" id="pwd_entry"
                        required="required" />
+            <br />
+            <br />
+
           </fieldset>
-            <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
+
+            <br />
+
             <input type="submit" id="submit-button" name="login-submit-button"  value="login" />
+            <input type="submit" id="register-button" name="register-button" value="Register" formnovalidate />
         </fieldset>
         </form>
         <?php
 }
-
-
-
 ?>
