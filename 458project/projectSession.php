@@ -21,10 +21,11 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 -->
 
 <head>
-    <title> WEASELCHAT </title>
+    <title> MONGOOSE MANAGER </title>
         <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="homepage.css">
-     <link href="calendar.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="homepage.css" />
+    <!--<link href="calendar.css" type="text/css" rel="stylesheet" />-->
 
     <!--<script type="text/javascript" src="jquery-3.3.1.min.js" defer="defer"></script>-->
     <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -36,6 +37,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     <script src="chat.js" type="text/javascript" defer="defer"></script>
     <script src="cal.js" type="text/javascript" defer="defer"></script>
     <script src="slides.js" type="text/javascript" defer="defer"></script>
+    <script src="project.js" type="text/javascript" defer="defer"></script>
 
     <?php
     require_once("create_hsu_login.php");

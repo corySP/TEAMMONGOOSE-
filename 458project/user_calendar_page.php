@@ -70,7 +70,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1> Your Calendar </h1>
+<h1> YOUR CALENDAR </h1>
 <?php
 $username = DB_USER;
 $password = DB_PASS;

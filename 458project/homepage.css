@@ -37,17 +37,56 @@ input
     right: 0;
 }
 
+#taskDiv
+{
+    height: 70%;
+    overflow-y:auto;
+}
+
+#selectDiv
+{
+    text-align:center;
+}
+
+#projList
+{
+    font-size: large;
+}
+
 button
 {
 	background-color: #aceace;
 	padding: 8px;
 	cursor:pointer;
+    border: none;
+    color: white;
+}
+
+.fbtn
+{
+	background-color: #aceace;
+	padding: 8px;
+	cursor:pointer;
+    border: none;
+    color: white;
+}
+
+.fbtn:hover 
+{
+    background-color: white;
+    color: black;
 }
 
 .titlebar
 {
 	z-index:2;
 	background-color:#837e87;
+	font-family: "Palatino Linotype", "Book Antique", Palatino, serif;
+    position: fixed;
+    width:100%;
+    top:0;
+    left:0;
+    right:0;
 }
 
 #footer
@@ -55,6 +94,8 @@ button
     position: fixed;
     height:2em;
     width:100%;
+    left:0;
+    right:0;
     bottom: 0;
 	z-index:3;
 	background-color:#837e87;
@@ -81,6 +122,9 @@ button
 {
 	height: 100%;
 	width: auto;
+    top:4em;
+    left:0;
+    bottom:0;
 	position:fixed;
 	z-index: 1;
 	overflow-x: hidden;
@@ -187,13 +231,19 @@ button
 body
 {
 	//background-color:#837e87;
-	font-family: "Palatino Linotype", "Book Antique", Palatino, serif;
+	//font-family: "Palatino Linotype", "Book Antique", Palatino, serif;
 }
+
 h1
 {
 	//margin-left: 20px;
 	color: #aceace;
 	
+}
+
+h3
+{
+    color: #aceace;
 }
 
 #chatLog
@@ -205,9 +255,14 @@ h1
 
 #contents
 {
+    position:relative;
+    margin-top: 6em;
+    margin-bottom:4em;
+    //height:60em;
     width:70%;
     margin-left:auto;
     margin-right:auto;
+    overflow-y:auto;
 }
 
 /*.chatBox

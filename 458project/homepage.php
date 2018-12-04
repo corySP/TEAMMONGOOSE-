@@ -25,7 +25,7 @@
     <div id="titlebar" class="titlebar">
         <!--<a href="JavaScript:popup('./user_calendar_page.php')">WEASELCHAT</a>-->
         <a href="javascript:void(0)"><b>WEASEL PROJECT MANAGEMENT</b></a>
-        <button id="slidePaneBtn">Nav</button>
+        <button id="slidePaneBtn" class="fbtn"><i class="fa fa-bars"></i> Menu</button>
     </div>  
     <!-- <hr /> -->
 
@@ -39,11 +39,16 @@
         <br />
         <button id="calendar">Calendar</button>
 -->
-        <a href="javascript:void(0)" id="tasks">PROJECT</a>
+<br />
+        <a href="javascript:void(0)" id="tasks">YOUR TASKS</a>
+<hr />
+        <a href="javascript:void(0)" id="projLink">PROJECTS</a>
+<!--
 <hr />
         <a href="javascript:void(0)" id="calendarBtn">CALENDAR</a>
+-->
 <hr />
-        <a href="JavaScript:popup('./user_calendar_page.php')" id="calendarBtn2">CAL_POP</a>
+        <a href="JavaScript:popup('./user_calendar_page.php')" id="calendarBtn2">CALENDAR</a>
 <hr />
 <!--
         <a href="homepage.php#group2">Group 2</a>
@@ -56,12 +61,14 @@
 -->
 
     </div>
+    <br />
+    <br />
     <div id="chatbar" class="chatbar">
         <?php require_once('chatbox.php');?>
     </div>
 
     <div id="footer">
-        <button id="slideChatBtn">Chat</button>
+        <button id="slideChatBtn" class="fbtn"><i class="fa fa-comment"></i> Chat</button>
     </div>
 <!--
 </body>
