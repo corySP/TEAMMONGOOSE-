@@ -30,7 +30,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     require_once("register_confirmation.php");
     require_once("user_home_page.php");
     require_once("user_calendar_page.php");
-    require_once("user_file_page.php");
+//    require_once("user_file_page.php");
     require_once("create_test.php");
     require_once("hsu_conn_sess.php");
     require_once("destroy_and_exit.php");
