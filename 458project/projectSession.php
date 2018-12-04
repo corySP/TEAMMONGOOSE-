@@ -3,6 +3,7 @@
 ?>
 
 <!DOCTYPE html>
+<!--<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp" ng-controller="AppCtrl">-->
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <!--
@@ -20,13 +21,23 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
 -->
 
 <head>
-    <title> WEASELCHAT </title>
+    <title> MONGOOSE MANAGER </title>
         <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="homepage.css">
-    <script type="text/javascript" src="jquery-3.3.1.min.js" defer="defer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="homepage.css" />
+    <!--<link href="calendar.css" type="text/css" rel="stylesheet" />-->
+
+    <!--<script type="text/javascript" src="jquery-3.3.1.min.js" defer="defer"></script>-->
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https:code.jquery.com/ui/1.12.1/jquery-ui.js" defer="defer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js" type="text/javascript" defer="defer"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js" defer="defer"></script>
     <script type="text/javascript" src="task.js" defer="defer"></script>
+    <script type="text/javascript" src="calendar.js" defer="defer"></script>
     <script src="chat.js" type="text/javascript" defer="defer"></script>
-    <script src="buCal.js" type="text/javascript" defer="defer"></script>
+    <script src="cal.js" type="text/javascript" defer="defer"></script>
+    <script src="slides.js" type="text/javascript" defer="defer"></script>
+    <script src="project.js" type="text/javascript" defer="defer"></script>
 
     <?php
     require_once("create_hsu_login.php");
@@ -34,14 +45,13 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     require_once("register.php");
     require_once("register_confirmation.php");
     require_once("user_home_page.php");
-    require_once("user_calendar_page.php");
+    //require_once("user_calendar_page.php");
     require_once("user_file_page.php");
     require_once("create_test.php");
     require_once("hsu_conn_sess.php");
     require_once("destroy_and_exit.php");
     ?>
 
-    <script src="calendar.js" type="text/javascript"> </script>   
 </head>
 
 <body>
@@ -102,7 +112,7 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     	   (array_key_exists('login-submit-button', $_POST))) ||
 	   (($_SESSION['next-stage'] == "user_logged_in") &&
 	   (array_key_exists('user_to_home', $_POST))))
-	   
+       //))
        {
            ///Generates user home page
 	   create_user_home_page();

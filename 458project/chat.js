@@ -17,10 +17,10 @@ $(document).ready( function() {
     });
 
     setInterval( function() {
-        retrieveMessages()
+            retrieveMessagesPostInsert();
     }, refreshInterval);
 
-    retrieveMessages();
+    retrieveMessagesPostInsert();
     $chatLog.scrollTop($chatLog[0].scrollHeight);
 });
     
@@ -141,6 +141,7 @@ function retrieveMessages() {
         var $chatLog = $("#chatLog");
         var jsonData = JSON.parse(data);
         var html = "";
+        var oldID = lastID;
 
         for (var i=0; i<jsonData.results.length; i++)
         {
@@ -158,6 +159,7 @@ function retrieveMessagesPostInsert() {
         var $chatLog = $("#chatLog");
         var jsonData = JSON.parse(data);
         var html = "";
+        var oldID = lastID;
 
         for (var i=0; i<jsonData.results.length; i++)
         {
@@ -167,6 +169,9 @@ function retrieveMessagesPostInsert() {
             lastID = result.id;
         }
         $chatLog.append(html);
-        $chatLog.scrollTop($chatLog[0].scrollHeight);
+
+        if ( oldID != lastID) {
+            $chatLog.scrollTop($chatLog[0].scrollHeight);
+        }
     });
 }

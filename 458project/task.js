@@ -12,6 +12,8 @@ $(document).ready( function() {
         getTasks();
     });
 
+    getTasks();
+
 });
 
 function getTasks() {
@@ -20,7 +22,7 @@ function getTasks() {
     }, function(data) {
         var $maindiv = $("#contents");
         var jsonData = JSON.parse(data);
-        var html = "";
+        var html = "<h1>YOUR TASKS</h1>";
 
         for (var i=0; i<jsonData.results.length; i++)
         {
