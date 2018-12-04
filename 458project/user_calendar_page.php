@@ -15,77 +15,27 @@
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<!--     <script src="calendar.js" type="text/javascript"></script> -->
-     
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>     
 </head>
 
 <body>
+
+<h1> Your Calendar </h1>
+
 <?php
 session_start();
-
-ini_set('display_errors', 'On');
-ini_set('html_errors', 0);
-error_reporting(-1);
-function ShutdownHandler()
-{
-   if(@is_array($error = @error_get_lsat()))
-   {
-       return(@call_user_func_array9('ErrorHandler', $error));
-   };
-   return(TRUE);
-};
-register_shutdown_function('ShutdownHandler');
-function ErrorHandler($type, $message, $file, $line)
-{
-   $_ERRORS = Array(
-        0x0001 => 'E_ERROR',
-        0x0002 => 'E_WARNING',
-        0x0004 => 'E_PARSE',
-        0x0008 => 'E_NOTICE',
-        0x0010 => 'E_CORE_ERROR',
-        0x0020 => 'E_CORE_WARNING',
-        0x0040 => 'E_COMPILE_ERROR',
-        0x0080 => 'E_COMPILE_WARNING',
-        0x0100 => 'E_USER_ERROR',
-        0x0200 => 'E_USER_WARNING',
-        0x0400 => 'E_USER_NOTICE',
-        0x0800 => 'E_STRICT',
-        0x1000 => 'E_RECOVERABLE_ERROR',
-        0x2000 => 'E_DEPRECATED',
-        0x4000 => 'E_USER_DEPRECATED'
-    );
-    if(!@is_string($name = @array_search($type, @array_flip($_ERRORS))))
-    {
-        $name = 'E_UNKNOWN';
-    };
-    return(print(@sprintf("%s Error in file \xBB%s\xAB at line %d: %s\n", $name, @basename($file), $line, $message)));
-};
-$old_error_handler = set_error_handler("ErrorHandler");
-/*======
-   function: create_user_calendar_page: void -> void
-   purpose: expect nothing, and returns nothing, BUT does
-            expect the $_SESSION array to contain a key "username"
-            with a valid Oracle username, and a key "password"
-            with a valid Oracle password;
-=====*/
-?>
-<h1> Your Calendar </h1>
-<?php
-$username = DB_USER;
-$password = DB_PASS;
 $conn = hsu_conn_sess(DB_USER, DB_PASS);
 $get_tasks_str = 'select task_date, task_name
 	       	  from   Task
                   where  Task.user_id = :current_user';
 $get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 									  
-      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+$current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
 //$current_user = 00000001;
 oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	      
 oci_execute($get_tasks_stmt, OCI_DEFAULT);
- $tasks = array();
+$tasks = array();
  
 while (oci_fetch($get_tasks_stmt))
 {
@@ -101,7 +51,6 @@ $get_events_str = 'select event_name, event_datetime
 		   from   Event, Account, Event_users
 		   where  Event_users.user_id = :current_user
 			  and Event.event_id = Event_users.event_id';
-																
 $get_events_stmt = oci_parse($conn, $get_events_str);
 																
 oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
@@ -123,15 +72,14 @@ $js_tasks = json_encode($tasks);
 $js_events = json_encode($events);
 ?>
 
-    <!-- <script src="calendar.js" type="text/javascript"></script> -->
-     <div calendar class="calendar" id="calendar"></div>
+<div calendar class="calendar" id="calendar"></div>
+
 </body>
 </html>
 
-
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 <script>
 /*
 Copyright (c) 2018 by Benjamin (https://codepen.io/maggiben/pen/OPmLBW)
@@ -530,11 +478,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   ("");
 })();
 
-/****************************/
-/****************************/
-/****************************/
-/****************************/
-/****************************/
 var js_tasks = JSON.parse('<?php echo $js_tasks; ?>');
 var js_events = JSON.parse('<?php echo $js_events; ?>');
 var tasks_and_events = [];
@@ -548,7 +491,7 @@ for (var i = 0; i < js_tasks.length; i++)
     var mon = date_conversion[1];
     var day = parseInt(date_conversion[0]);
 
-var month;
+    var month;
     if (mon == "JAN")
     {
         month = 0;
@@ -604,30 +547,30 @@ var month;
         {
 	    var length = tasks_and_events.length;
             for (var j = 0; j < length; j++)
-                {
-                    if (tasks_and_events[j].date.getTime() == converted_date.getTime())
-                        {
-                            tasks_and_events[j].events.push({
-                                 name: js_tasks[i][1],
-                                 type: 'task',
-                                 color: 'green',
-                                })
-                            }
-                    }
-            }
+            {
+                 if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+                 {
+                     tasks_and_events[j].events.push({
+                         name: js_tasks[i][1],
+                         type: 'task',
+                         color: 'green',
+                         })
+                 }
+             }
+         }
     else
-        {
-            var task = {
-                date: converted_date,
-                events: [{
-                    name: js_tasks[i][1],
-                    type: 'task',
-                    color: 'green',
-                    }]
-                }
-            tasks_and_events.push(task);
-	        dates.push(currdate);
-            }
+    {
+        var task = {
+            date: converted_date,
+            events: [{
+                name: js_tasks[i][1],
+                type: 'task',
+                color: 'green',
+            }]
+        }
+        tasks_and_events.push(task);
+	dates.push(currdate);
+    }
 }
 
 for (var i = 0; i < js_events.length; i++)
@@ -638,7 +581,7 @@ for (var i = 0; i < js_events.length; i++)
     var mon = date_conversion[1];
     var day = parseInt(date_conversion[0]);
 
-var month;
+    var month;
     if (mon == "JAN")
     {
         month = 0;
@@ -691,43 +634,40 @@ var month;
     var converted_date = new Date(year, month, day);
 
     if (dates.includes(currdate))
+    {
+        var length = tasks_and_events.length;
+        for (var j = 0; j < length; j++)
         {
-          var length = tasks_and_events.length;
-            for (var j = 0; j < length; j++)
-                {
-                if (tasks_and_events[j].date.getTime() == converted_date.getTime())
-                        {
-				
-			  tasks_and_events[j].events.push({
-                                 name: js_events[i][1],
-                                 type: 'event',
-                                 color: 'pink',
-                                })
-                            }
-                    }
-            }
-    else
-        {
-            var vevent = {
-                date: converted_date,
-                events: [{
+            if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+            {			
+	        tasks_and_events[j].events.push({
                     name: js_events[i][1],
                     type: 'event',
                     color: 'pink',
-                    }]
-                }
-            tasks_and_events.push(vevent);
-	        dates.push(currdate);
+                })
             }
+        }
+    }
+    else
+    {
+        var vevent = {
+            date: converted_date,
+            events: [{
+                name: js_events[i][1],
+                type: 'event',
+                color: 'pink',
+            }]
+        }
+        tasks_and_events.push(vevent);
+        dates.push(currdate);
+    }
 }
+
 var test = tasks_and_events.toString();
 var app = angular.module('myApp', []);
 app.controller('AppCtrl', function($scope){
- // alert("pepe")
-// $window.location = 'http://nrs-projects.humboldt.edu/~mfh128/458project/user_calendar_page.php'
 });
 app.directive('calendar', [function(){
-  //$window.alert("app");
   return {
     restrict: 'EA',
     scope: {
