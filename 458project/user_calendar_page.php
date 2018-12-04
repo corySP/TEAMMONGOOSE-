@@ -70,7 +70,7 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1> Your Calendar </h1>
+<h1> YOUR CALENDAR </h1>
 <?php
 $username = DB_USER;
 $password = DB_PASS;
@@ -124,9 +124,9 @@ $js_events = json_encode($events);
 ?>
 
     <!-- <script src="calendar.js" type="text/javascript"></script> -->
+    <div id="calcont">
      <div calendar class="calendar" id="calendar"></div>
-</body>
-</html>
+    </div>
 
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
