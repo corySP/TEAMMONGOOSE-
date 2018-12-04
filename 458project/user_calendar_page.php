@@ -70,6 +70,8 @@ oci_free_statement($get_events_stmt);
  
 $js_tasks = json_encode($tasks);
 $js_events = json_encode($events);
+
+session_destroy();
 ?>
 
 <div calendar class="calendar" id="calendar"></div>
