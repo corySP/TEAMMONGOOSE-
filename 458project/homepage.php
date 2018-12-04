@@ -41,14 +41,16 @@
 -->
         <a href="javascript:void(0)" id="tasks">PROJECT</a>
 <hr />
-        <a href="javascript:void(0)" id="calendar">CALENDAR</a>
+        <a href="javascript:void(0)" id="calendarBtn">CALENDAR</a>
+<hr />
+        <a href="JavaScript:popup('./user_calendar_page.php')" id="calendarBtn2">CAL_POP</a>
+<hr />
 <!--
         <a href="homepage.php#group2">Group 2</a>
         <a href="homepage.php#group3">Group 3</a>
 -->
     </div>
      <div id="contents"></div>
-
 <!--
     <div class="memberbar">
 -->

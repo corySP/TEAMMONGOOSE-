@@ -3,7 +3,7 @@
 *:after {
   box-sizing: border-box;
 }
-body {
+#calcont {
   overflow: hidden;
   font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: 100;
