@@ -25,13 +25,21 @@
     <div id="titlebar" class="titlebar">
         <!--<a href="JavaScript:popup('./user_calendar_page.php')">WEASELCHAT</a>-->
         <a href="javascript:void(0)"><b>WEASEL PROJECT MANAGEMENT</b></a>
-        <button id="slidePaneBtn" class="fbtn"><i class="fa fa-bars"></i> Menu</button>
-    </div>  
+        <button id="slidePaneBtn" class="fbtn"><i class="fa fa-bars"></i> 
+            Menu </button>
+        <form method="post" action="<?= htmlentities($_SERVER['PHP_SELF'],
+            ENT_QUOTES) ?>">
+            <button id="logoutBtn" name="user_log_out">
+                <i class="fa fa-power-off"></i> Logout
+            </button>
+        </form>
+     </div>
     <!-- <hr /> -->
 
 <!--
     <p> <?php echo $_SESSION['current_user']; ?> </p>
 -->
+
 
     <div id="groupbar">
 <!--

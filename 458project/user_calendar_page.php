@@ -76,7 +76,7 @@ $username = DB_USER;
 $password = DB_PASS;
 $conn = hsu_conn_sess(DB_USER, DB_PASS);
 $get_tasks_str = 'select task_date, task_name
-	       	  from   Task
+                  from   Task
                   where  Task.user_id = :current_user';
 $get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 									  
@@ -97,14 +97,18 @@ while (oci_fetch($get_tasks_stmt))
 }
 oci_free_statement($get_tasks_stmt);
 										     
+/*
 $get_events_str = 'select event_name, event_datetime
-		   from   Event, Account, Event_users
+		   from   Event
 		   where  Event_users.user_id = :current_user
 			  and Event.event_id = Event_users.event_id';
+ */
+$get_events_str = 'select event_name, event_datetime
+                   from Event';
 																
 $get_events_stmt = oci_parse($conn, $get_events_str);
 																
-oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
+//oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
 																
 oci_execute($get_events_stmt, OCI_DEFAULT);
  

@@ -54,8 +54,11 @@ function create_register_confirmation()
 
      // Saving the hsu credentials into local variables     
      
-     $master_username = ($_SESSION["master_username"]);
-     $master_password = ($_SESSION["master_password"]);
+     //$master_username = ($_SESSION["master_username"]);
+     //$master_password = ($_SESSION["master_password"]);
+     require_once("../../_conn.php");
+     $master_username = DB_USER;
+     $master_password = DB_PASS;
 
      $conn = hsu_conn_sess($master_username, $master_password);
 
