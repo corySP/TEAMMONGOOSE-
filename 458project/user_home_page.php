@@ -25,7 +25,6 @@ function create_user_home_page()
    {
       $login_check_return = $_SESSION["current_user"];
    }
-   
    else
    {   
 	if ( (! array_key_exists("username", $_POST)) or
@@ -49,8 +48,11 @@ function create_user_home_page()
 
        	 // Saving the hsu credentials into local variables
 
-       	 $master_username = ($_SESSION["master_username"]);
-       	 $master_password = ($_SESSION["master_password"]);
+       	 //$master_username = ($_SESSION["master_username"]);
+       	 //$master_password = ($_SESSION["master_password"]);
+         require_once("../../_conn.php");
+       	 $master_username = DB_USER;
+       	 $master_password = DB_PASS;
 
        	 $conn = hsu_conn_sess($master_username, $master_password);
 
@@ -128,12 +130,12 @@ function create_user_home_page()
     	else  
     	{    
 
+	/*======
         ?>
         <form method="post"
               action="<?= htmlentities($_SERVER['PHP_SELF'],
                                        ENT_QUOTES) ?>">
         <?php
-	/*======
 	 <fieldset>
           <legend> User Home Page:
            </legend>
@@ -145,10 +147,9 @@ function create_user_home_page()
           </fieldset>
         </form>
        =======*/
+    require_once('homepage.php');
        ?>
     <?php
     }
-    require_once('chatbox.php');
-    require_once('homepage.php');
 }
 ?>

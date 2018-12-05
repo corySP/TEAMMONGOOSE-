@@ -70,18 +70,18 @@ $old_error_handler = set_error_handler("ErrorHandler");
             with a valid Oracle password;
 =====*/
 ?>
-<h1> YOUR CALENDAR </h1>
+<h1 id="test"></h1>
 <?php
 $username = DB_USER;
 $password = DB_PASS;
 $conn = hsu_conn_sess(DB_USER, DB_PASS);
 $get_tasks_str = 'select task_date, task_name
-                  from   Task
+	       	  from   Task
                   where  Task.user_id = :current_user';
 $get_tasks_stmt = oci_parse($conn, $get_tasks_str);
 									  
-      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
-//$current_user = 00000001;
+//      $current_user = intval(strip_tags(htmlspecialchars($_SESSION["current_user"])));
+$current_user = 00000001;
 oci_bind_by_name($get_tasks_stmt, ':current_user', $current_user);
 	      
 oci_execute($get_tasks_stmt, OCI_DEFAULT);
@@ -97,18 +97,14 @@ while (oci_fetch($get_tasks_stmt))
 }
 oci_free_statement($get_tasks_stmt);
 										     
-/*
 $get_events_str = 'select event_name, event_datetime
-		   from   Event
+		   from   Event, Account, Event_users
 		   where  Event_users.user_id = :current_user
 			  and Event.event_id = Event_users.event_id';
- */
-$get_events_str = 'select event_name, event_datetime
-                   from Event';
 																
 $get_events_stmt = oci_parse($conn, $get_events_str);
 																
-//oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
+oci_bind_by_name($get_events_stmt, ':current_user', $current_user);
 																
 oci_execute($get_events_stmt, OCI_DEFAULT);
  
@@ -128,9 +124,9 @@ $js_events = json_encode($events);
 ?>
 
     <!-- <script src="calendar.js" type="text/javascript"></script> -->
-    <div id="calcont">
      <div calendar class="calendar" id="calendar"></div>
-    </div>
+</body>
+</html>
 
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -606,10 +602,9 @@ var month;
     var converted_date = new Date(year, month, day);
     if (dates.includes(currdate))
         {
-	    var length = tasks_and_events.length;
-            for (var j = 0; j < length; j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                    if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+                    if (tasks_and_events[j].date == converted_date)
                         {
                             tasks_and_events[j].events.push({
                                  name: js_tasks[i][1],
@@ -696,12 +691,11 @@ var month;
 
     if (dates.includes(currdate))
         {
-          var length = tasks_and_events.length;
-            for (var j = 0; j < length; j++)
+            for (var j = 0; j < tasks_and_events.length; j++)
                 {
-                if (tasks_and_events[j].date.getTime() == converted_date.getTime())
+                    if (tasks_and_events[j].date == converted_date)
                         {
-				
+
 			  tasks_and_events[j].events.push({
                                  name: js_events[i][1],
                                  type: 'event',

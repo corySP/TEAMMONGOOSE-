@@ -54,8 +54,11 @@ function create_register_confirmation()
 
      // Saving the hsu credentials into local variables     
      
-     $master_username = ($_SESSION["master_username"]);
-     $master_password = ($_SESSION["master_password"]);
+     //$master_username = ($_SESSION["master_username"]);
+     //$master_password = ($_SESSION["master_password"]);
+     require_once("../../_conn.php");
+     $master_username = DB_USER;
+     $master_password = DB_PASS;
 
      $conn = hsu_conn_sess($master_username, $master_password);
 
@@ -84,7 +87,10 @@ function create_register_confirmation()
 
 
 
+
 	    
+
+
 
 	    oci_bind_by_name($add_user_stmt, ":p_email", $user_email);
 	    oci_bind_by_name($add_user_stmt, ":p_password", $user_password);
@@ -99,7 +105,11 @@ function create_register_confirmation()
 	}     
 	
 
+
 	oci_free_statement("$email_check_stmt");
+
+	oci_free_statement($email_check_stmt);
+
 
 	oci_free_statement($email_check_stmt);
 

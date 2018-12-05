@@ -8,7 +8,7 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-!(function() {
+! function() {
 
   var today = moment();
 
@@ -385,7 +385,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     }
     return element;
   }''
-})();
+}();
 
 /****************************/
 /****************************/
@@ -393,3 +393,103 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /****************************/
 /****************************/
 
+var js_tasks = JSON.parse('<?= $js_tasks; ?>');
+var js_events = JSON.parse('<?= $js_events; ?>');
+
+var tasks_and_events = [];
+var dates = [];
+
+for (var i = 0; i < js_tasks.length; i++)
+{
+    var currdate = js_tasks[i][0];
+    
+    var date_conversion = currdate.split("-");
+    var year = date_conversion[0];
+    var month = date_conversion[1];
+    var day = date_conversion[2];
+    var converted_date = new Date(year, month, day);
+    
+    if (dates.includes(currdate))
+	{
+	    for (var j = 0; j < tasks_and_events.length, j++)
+		{
+		    if (tasks_and_events[j].date == converted_date)
+			{
+			    tasks_and_events[j].events.push({
+				 name: js_tasks[i][1],
+				 type: 'task',
+				 color: 'green',
+				})
+			    }
+		    }
+	    }
+    else
+	{
+	    var task = {
+		date: converted_date,
+		events: [{
+		    name: js_tasks[i][1],
+		    type: 'task',
+		    color: 'green',
+		    }]
+		}
+	    
+	    tasks_and_events.push(task);
+	    }
+}
+
+for (var i = 0; i < js_.length; i++)
+{
+    var currdate = js_events[i][0];
+    
+    var date_conversion = currdate.split("-");
+    var year = date_conversion[0];
+    var month = date_conversion[1];
+    var day = date_conversion[2];
+    var converted_date = new Date(year, month, day);
+    
+    if (dates.includes(currdate))
+	{
+	    for (var j = 0; j < tasks_and_events.length, j++)
+		{
+		    if (tasks_and_events[j].date == converted_date)
+			{
+			    tasks_and_events[j].events.push({
+				 name: js_events[i][1],
+				 type: 'event',
+				 color: 'pink',
+				})
+			    }
+		    }
+	    }
+    else
+	{
+	    var vevent = {
+		date: converted_date,
+		events: [{
+		    name: js_events[i][1],
+		    type: 'event',
+		    color: 'pink',
+		    }]
+		}
+	    
+	    tasks_and_events.push(vevent);
+	    }
+}
+
+var app = angular.module('myApp', []);
+app.controller('AppCtrl', function($scope){
+  //alert("pepe")
+});
+app.directive('calendar', [function(){
+  return {
+    restrict: 'EA',
+    scope: {
+      date: '=',
+      events: '='
+    },
+    link: function(scope, element, attributes) {
+      var calendar = new Calendar('#calendar', tasks_and_events);
+    }
+  }
+}]);
