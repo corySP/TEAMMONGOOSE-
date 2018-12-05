@@ -41,11 +41,11 @@ function create_login()
                                        ENT_QUOTES) ?>">
         <fieldset>
 	 <fieldset>
-         <legend> Enter your username/password:
+         <legend> Enter your email/password:
          </legend>
             <br />
 
-      <label class="heading" for="name_entry"> Username: </label>
+      <label class="heading" for="name_entry"> Email: </label>
       <input type="text" name="username" id="name_entry"
              required="required" />
             <br />

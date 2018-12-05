@@ -40,14 +40,10 @@ http://nrs-projects.humboldt.edu/~cjd10/458project/TEAMMONGOOSE-/458project/proj
     <script src="project.js" type="text/javascript" defer="defer"></script>
 
     <?php
-    require_once("create_hsu_login.php");
     require_once("create_login.php");
     require_once("register.php");
     require_once("register_confirmation.php");
     require_once("user_home_page.php");
-    //require_once("user_calendar_page.php");
-    require_once("user_file_page.php");
-    require_once("create_test.php");
     require_once("hsu_conn_sess.php");
     require_once("destroy_and_exit.php");
     ?>

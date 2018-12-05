@@ -7,7 +7,7 @@ create table Account
 (USER_ID integer,
 email_addr varchar2(32) not null,
 password varchar2(64) not null, --Don't know what datatype; temporary
-user_name varchar2(32),
+user_name varchar2(64),
 primary key (user_id)
 );
 
@@ -17,7 +17,7 @@ drop table Event cascade constraints;
 create table Event
 (EVENT_ID integer,
 event_datetime date not null,
-event_name varchar(32),
+event_name varchar(128),
 primary key (event_id)
 );
 
@@ -36,9 +36,9 @@ primary key (UGROUP_ID)
 drop table Project cascade constraints;
 create table Project
 (PROJECT_ID integer,
-project_description varchar2(280),
+project_description varchar2(1024),
 ugroup_id integer,
-project_name varchar(16),
+project_name varchar(128),
 primary key (project_id),
 foreign key (ugroup_id) references Usergroup
 );
@@ -53,10 +53,10 @@ create table Task
 user_id integer,
 project_id integer not null,
 current_status varchar2(16) not null,
-task_description varchar2(280),
+task_description varchar2(1024),
 task_date date,
-user_comment varchar2(140),
-task_name varchar2(16),
+user_comment varchar2(1024),
+task_name varchar2(128),
 primary key (task_id),
 foreign key (user_id) references Account,
 foreign key (project_id) references Project
@@ -107,7 +107,7 @@ foreign key (user_id) references Account
 drop table Chat_message cascade constraints;
 create table Chat_message
 (MESSAGE_ID integer not null,
-user_name varchar2(32) not null,
+user_name varchar2(64) not null,
 message_text varchar2(1024),
 primary key (message_id)
 );
@@ -132,8 +132,8 @@ show errors
 drop table Hangman cascade constraints;
 create table Hangman
 (HANG_ID integer not null,
-word varchar2(32) not null,
-current_progress varchar2(32) not null,
+word varchar2(64) not null,
+current_progress varchar2(64) not null,
 hang_level integer not null,
 complete integer not null,
 primary key (hang_id)
